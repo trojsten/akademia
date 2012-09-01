@@ -1,0 +1,4 @@
+# all CPython byte-compiled files
+*.py[oc]
+# vim temporary files
+.*.swp
