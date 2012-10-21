@@ -1,7 +1,7 @@
 Django==1.4.2
 South==0.7.6
 distribute==0.6.29
-django-social-auth==0.7.7
+django-social-auth==0.7.5
 httplib2==0.7.6
 oauth2==1.5.211
 pysqlite==2.6.3
