@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'ksp_login',
     'django.contrib.admin',
     'events',
+    'news',
 )
 
 # A sample logging configuration. The only tangible logging
