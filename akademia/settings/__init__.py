@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'south',
     'social_auth',
     'ksp_login',
     # Uncomment the next line to enable the admin:
