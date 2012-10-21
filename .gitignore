@@ -2,3 +2,5 @@
 *.py[oc]
 # vim temporary files
 .*.swp
+# the development sqlite database file
+database.sqlite3
