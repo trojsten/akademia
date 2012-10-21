@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load markup %}
+{% load url from future %}
+
+{% block title %}Novinky{% endblock title %}
+
+{% block content %}
+    {% for entry in news_entries %}
+        <h3>{{ entry.title }}</h3>
+        <div class="news_entry_details">
+            <span class="news_entry_pub_date">{{ entry.pub_date|date:"DATETIME_FORMAT" }}</span>,
+            <span class="news_entry_author">{{ entry.author.username }}</span>
+        </div>
+        <div class="news_entry_text">
+            {{ entry.text|markdown }}
+        </div>
+    {% empty %}
+        <p>
+            Nemáme žiadne novinky…
+        </p>
+    {% endfor %}
+
+    {% if is_paginated %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="{% url "news_list" page=page_obj.previous_page_number %}">Novšie novinky</a>
+            {% endif %}
+            <span class="page-current">
+                Strana {{ page_obj.number }} z&nbsp;{{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="{% url "news_list" page=page_obj.next_page_number %}">Staršie novinky</a>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock content %}
