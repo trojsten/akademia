@@ -1,8 +1,9 @@
-# Django settings for akademia project.
+# Common settings for akademia.
 import os
+import akademia
 
 PROJECT_DIR, PROJECT_MODULE_NAME = os.path.split(
-    os.path.dirname(os.path.realpath(myproject.__file__))
+    os.path.dirname(os.path.realpath(akademia.__file__))
 )
 
 DEBUG = False
@@ -121,8 +122,10 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_auth',
+    'ksp_login',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -155,3 +158,36 @@ LOGGING = {
         },
     }
 }
+
+# The list of authentication backends we want to allow.
+AUTHENTICATION_BACKENDS = (
+#    'social_auth.backends.facebook.FacebookBackend',
+#    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.google.GoogleBackend',
+#    'social_auth.backends.contrib.linkedin.LinkedinBackend',
+#    'social_auth.backends.contrib.livejournal.LiveJournalBackend',
+#    'social_auth.backends.contrib.github.GithubBackend',
+#    'social_auth.backends.contrib.dropbox.DropboxBackend',
+#    'social_auth.backends.contrib.flickr.FlickrBackend',
+    'ksp_login.backends.MyOpenIdBackend',
+    'ksp_login.backends.LaunchpadBackend',
+    'social_auth.backends.OpenIDBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# The number of authentication providers to show in the short list.
+AUTHENTICATION_PROVIDERS_BRIEF = 3
+
+# The URL to which Django redirects as soon as login is required.
+LOGIN_URL = "/account/login/"
+LOGIN_REDIRECT_URL = "/account/"
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_auth.backends.pipeline.social.social_auth_user',
+    'social_auth.backends.pipeline.user.get_username',
+    'social_auth.backends.pipeline.misc.save_status_to_session',
+    'ksp_login.pipeline.register_user',
+    'social_auth.backends.pipeline.social.associate_user',
+    'social_auth.backends.pipeline.social.load_extra_data',
+    'social_auth.backends.pipeline.user.update_user_details'
+)
