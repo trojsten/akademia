@@ -160,6 +160,17 @@ LOGGING = {
     }
 }
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    "ksp_login.context_processors.login_providers_short",
+)
+
 # The list of authentication backends we want to allow.
 AUTHENTICATION_BACKENDS = (
 #    'social_auth.backends.facebook.FacebookBackend',

@@ -7,7 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'akademia.views.home', name='home'),
-    # url(r'^akademia/', include('akademia.foo.urls')),
+    url(r'^account/', include('ksp_login.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

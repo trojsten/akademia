@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <title>{% block title %}{% endblock title %} (Akadémia a&nbsp;Klub Trojstenu)</title>
+            <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" />
+            <link rel="stylesheet" href="{{ STATIC_URL }}/ksp_login/css/base.css" type="text/css" />
+        {% endblock head %}
+    </head>
+    <body>
+        <div id="root">
+            <div id="header">
+                <h2>Akadémia a&nbsp;Klub Trojstenu</h2>
+            </div>
+            <div id="main">
+                <div id="content">
+                    {% block content_root %}
+                    {% endblock content_root %}
+                </div>
+                <div id="sidebar">
+                    <div id="login_box">
+                        {% include "ksp_login/parts/login_box.html" %}
+                    </div>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+            <div id="footer">
+            </div>
+        </div>
+        {% block scripts %}
+            {% include "ksp_login/parts/include_javascript.html" %}
+        {% endblock scripts %}
+    </body>
+</html>
