@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 
-{% load markup %}
 {% load url from future %}
 
 {% block title %}Novinky{% endblock title %}
@@ -13,7 +12,7 @@
             <span class="news_entry_author">{{ entry.author.username }}</span>
         </div>
         <div class="news_entry_text">
-            {{ entry.text|markdown }}
+            {{ entry.rendered_text }}
         </div>
     {% empty %}
         <p>

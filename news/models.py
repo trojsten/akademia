@@ -1,6 +1,8 @@
 # coding: utf-8
 from __future__ import unicode_literals
 from django.db import models
+from django.utils.html import mark_safe
+from markdown import markdown
 
 
 class Entry(models.Model):
@@ -19,3 +21,6 @@ class Entry(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def rendered_text(self):
+        return mark_safe(markdown(self.text, safe_mode=False))
