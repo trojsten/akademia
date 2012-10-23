@@ -5,14 +5,15 @@ from django.db import models
 
 class School(models.Model):
     abbreviation = models.CharField(max_length=23,
+                                    blank=True,
                                     verbose_name="skratka",
                                     help_text="Sktatka názvu školy.")
     verbose_name = models.CharField(max_length=47,
                                     verbose_name="celý názov")
-    addr_name = models.CharField(max_length=47)
-    street = models.CharField(max_length=47)
-    city = models.CharField(max_length=47)
-    zip_code = models.CharField(max_length=10)
+    addr_name = models.CharField(max_length=47, blank=True)
+    street = models.CharField(max_length=47, blank=True)
+    city = models.CharField(max_length=47, blank=True)
+    zip_code = models.CharField(max_length=10, blank=True)
 
     class Meta:
         verbose_name = "škola"
