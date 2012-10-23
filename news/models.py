@@ -19,7 +19,8 @@ class Entry(models.Model):
     class Meta:
         get_latest_by = 'pub_date'
         ordering = ('-pub_date',)
-        verbose_name_plural = 'entries'
+        verbose_name = 'novinka'
+        verbose_name_plural = 'novinky'
 
     def __unicode__(self):
         return self.title
