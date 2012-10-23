@@ -168,6 +168,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
     "ksp_login.context_processors.login_providers_short",
+    "akademia.context_processors.current_site",
 )
 
 # The list of authentication backends we want to allow.
