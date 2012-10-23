@@ -22,3 +22,15 @@ class School(models.Model):
 
     def __unicode__(self):
         return self.verbose_name
+
+
+class AdditionalUserDetails(models.Model):
+    user = models.ForeignKey('auth.User')
+    school = models.ForeignKey(School, default=1,
+                               help_text='Pokiaľ vaša škola nie je '
+                               'v&nbsp;zozname, vyberte "Gymnázium iné" '
+                               'a&nbsp;pošlite nám e-mail.')
+    is_teacher = models.BooleanField(verbose_name="som učiteľ")
+
+    def __unicode__(self):
+        return "%s" % (self.user,)
