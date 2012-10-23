@@ -6,6 +6,7 @@
 
 {% block content %}
     {% for entry in news_entries %}
+      <div class="post">
         <h3>{{ entry.title }}</h3>
         <div class="news_entry_details">
             <span class="news_entry_pub_date">{{ entry.pub_date|date:"DATETIME_FORMAT" }}</span>,
@@ -14,6 +15,7 @@
         <div class="news_entry_text">
             {{ entry.rendered_text }}
         </div>
+      </div>
     {% empty %}
         <p>
             Nemáme žiadne novinky…
