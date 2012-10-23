@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.utils.html import mark_safe
+from django.contrib.sites.models import Site
 from markdown import markdown
 
 
@@ -13,6 +14,7 @@ class Entry(models.Model):
                             'href="http://en.wikipedia.org/wiki/Markdown">'
                             'Markdownom</a>.')
     slug = models.SlugField()
+    sites = models.ManyToManyField(Site)
 
     class Meta:
         get_latest_by = 'pub_date'
