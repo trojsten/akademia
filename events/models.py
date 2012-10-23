@@ -17,6 +17,7 @@ class School(models.Model):
     class Meta:
         verbose_name = "škola"
         verbose_name_plural = "školy"
+        ordering = ("verbose_name",)
 
     def __unicode__(self):
         return self.verbose_name
