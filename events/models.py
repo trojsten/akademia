@@ -66,6 +66,7 @@ class Lecture(models.Model):
     abstract = models.TextField(verbose_name="abstrakt")
     room = models.CharField(max_length=20, verbose_name="miestnosť")
     time = models.TimeField(verbose_name="čas")
+    video_url = models.URLField(verbose_name="URL videa")
 
     class Meta:
         verbose_name = "prednáška"
