@@ -25,7 +25,7 @@ class School(models.Model):
 
 
 class AdditionalUserDetails(models.Model):
-    user = models.ForeignKey('auth.User')
+    user = models.OneToOneField('auth.User')
     school = models.ForeignKey(School, default=1,
                                help_text='Pokiaľ vaša škola nie je '
                                'v&nbsp;zozname, vyberte "Gymnázium iné" '
