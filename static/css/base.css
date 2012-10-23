@@ -17,6 +17,7 @@ h1, h2, h3 {
 h1 {
 	font-size: 2.8em;
   margin-bottom: 0.5ex;
+	border-bottom: 1px solid #BBBBBB;
 }
 
 h2 {
@@ -160,17 +161,17 @@ a:hover {
 	background: #FFFFFF;
 }
 
-.post {
+.news_entry {
 	margin-bottom: 30px;
 	padding: 0px 0px;
 }
 
-.post .title {
+.news_entry .title {
 	height: 41px;
 	padding: 0px 0px 0px 0px;
 }
 
-.post .title a {
+.news_entry .title a {
 	letter-spacing: -2px;
 	text-decoration: none;
 	text-transform: lowercase;
@@ -178,14 +179,14 @@ a:hover {
 	border: none;
 }
 
-.post .entry {
+.news_entry .news_entry_text {
 	padding: 10px 0px 20px 0px;
 	padding-bottom: 20px;
 	border-bottom: 1px solid #BBBBBB;
 	text-align: justify;
 }
 
-.post .meta {
+.news_entry .news_entry_details {
 	overflow: hidden;
 	padding-top: 10px;
 }
