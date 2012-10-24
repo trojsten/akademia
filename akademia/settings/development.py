@@ -1,4 +1,4 @@
-from akademia.settings import *
+from akademia.settings.common import *
 
 DATABASES = {
     'default': {
