@@ -8,6 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', RedirectView.as_view(url='/news/page/1/')),
     url(r'^news/', include('news.urls')),
+    url(r'^events/', include('events.urls')),
     url(r'^account/', include('ksp_login.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block title %}Program: {{ event }}{% endblock title %}
+
+{% block content %}
+  {% if event.get_grouped_lectures %}
+    <ul class="event_schedule">
+      <li><span class="lecture_time">9:47</span>
+        <ul><li>
+          <p>Otvorenie Akadémie Trojstenu v&nbsp;posluchárni A</p>
+        </li></ul>
+      </li>
+      {% for time, lectures in event.get_grouped_lectures.items %}
+        <li><span class="lecture_time">{{ time|time:"H:i" }}</span>
+          <ul>
+            {% for lecture in lectures %}
+              <li>
+                <span class="lecturer">{{ lecture.lecturer }}</span> -
+                <span class="lecture_title">{{ lecture.title }}</span>
+                <span class="lecture_room">(Miestnosť {{ lecture.room }})</span>
+                <p class="lecture_abstract">
+                  {{ lecture.abstract }}
+                </p>
+            {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Pre túto akciu ešte nemáme program...</p>
+  {% endif %}
+{% endblock content %}

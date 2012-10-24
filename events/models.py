@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.sites.models import Site
+from django.utils.datastructures import SortedDict
 
 
 class School(models.Model):
@@ -41,12 +42,19 @@ class AdditionalUserDetails(models.Model):
         return "%s" % (self.user,)
 
 
+def choose_invitation_filename(instance, original):
+    return "invitations/%s.pdf" % (instance.date.isoformat(),)
+
+
 class Event(models.Model):
     name = models.CharField(max_length="47",
                             help_text="Názov akcie, napr. Klub Trojstenu "
                             "po Náboji FKS")
-    date = models.DateField()
+    date = models.DateField(unique=True)
     deadline = models.DateTimeField()
+    invitation = models.FileField(upload_to="invitations", blank=True,
+                                  help_text="PDF s pozvánkou, keď bude "
+                                  "hotová.")
     sites = models.ManyToManyField(Site)
 
     class Meta:
@@ -57,18 +65,35 @@ class Event(models.Model):
     def __unicode__(self):
         return "%s %s" % (self.name, self.date.year)
 
+    def get_grouped_lectures(self):
+        """
+        Returns the lectures for this event in a SortedDict mapping times
+        to lists of lectures sorted by their rooms.
+        """
+        try:
+            return self._grouped_lectures_cache
+        except AttributeError:
+            result = SortedDict()
+            for lecture in self.lectures.order_by("time", "room"):
+                result.setdefault(lecture.time, []).append(lecture)
+            self._grouped_lectures_cache = result
+            return result
+
 
 class Lecture(models.Model):
     event = models.ForeignKey(Event, verbose_name="akcia",
                               related_name="lectures")
     lecturer = models.CharField(max_length=47, verbose_name="prednášajúci")
     title = models.CharField(max_length=147, verbose_name="názov prednášky")
-    abstract = models.TextField(verbose_name="abstrakt")
+    abstract = models.TextField(blank=True, verbose_name="abstrakt")
     room = models.CharField(max_length=20, verbose_name="miestnosť")
     time = models.TimeField(verbose_name="čas")
-    video_url = models.URLField(verbose_name="URL videa")
+    video_url = models.URLField(blank=True, verbose_name="URL videa")
 
     class Meta:
         verbose_name = "prednáška"
         verbose_name_plural = "prednášky"
         ordering = ("event", "time")
+
+    def __unicode__(self):
+        return "%s: %s" % (self.lecturer, self.title)
