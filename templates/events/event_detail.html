@@ -4,6 +4,7 @@
 {% block title %}Program: {{ event }}{% endblock title %}
 
 {% block content %}
+  <h4>Dátum konania: {{ event.date|date:"j. n. Y" }}</h4>
   {% if event.get_grouped_lectures %}
     <ul class="event_schedule">
       <li><span class="lecture_time">9:47</span>
