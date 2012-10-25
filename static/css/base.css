@@ -161,6 +161,8 @@ a:hover {
 	background: #FFFFFF;
 }
 
+/* News */
+
 .news_entry {
 	margin-bottom: 30px;
 	padding: 0px 0px;
@@ -189,6 +191,25 @@ a:hover {
 .news_entry .news_entry_details {
 	overflow: hidden;
 	padding-top: 10px;
+}
+
+/* Schedule */
+
+ul.event_schedule, ul.event_schedule ul {
+  list-style: none;
+}
+
+.lecturer {
+  font-weight: bold;
+}
+
+.lecture_title {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.lecture_abstract {
+  padding-left: 1em;
 }
 
 /* Sidebar */
