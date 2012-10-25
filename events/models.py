@@ -51,7 +51,7 @@ class Event(models.Model):
                             help_text="Názov akcie, napr. Klub Trojstenu "
                             "po Náboji FKS")
     date = models.DateField(unique=True)
-    deadline = models.DateTimeField()
+    deadline = models.DateTimeField(help_text="Deadline na prihlasovanie")
     invitation = models.FileField(upload_to="invitations", blank=True,
                                   help_text="PDF s pozvánkou, keď bude "
                                   "hotová.")
