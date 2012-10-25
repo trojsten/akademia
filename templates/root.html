@@ -7,7 +7,7 @@
             <title>{% block title %}{% endblock title %} ({{ site.name }})</title>
             <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" />
             <link rel="stylesheet" href="{{ STATIC_URL }}/ksp_login/css/base.css" type="text/css" />
-            <link rel="alternate" type="application/atom+xml" title="Novinky Akadémie Trojstenu" href="{% url "news_feed" %}" />
+            <link rel="alternate" type="application/atom+xml" title="{{ site.name }}: Novinky" href="{% url "news_feed" %}" />
         {% endblock head %}
     </head>
     <body>
