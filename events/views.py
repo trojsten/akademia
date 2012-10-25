@@ -1,10 +1,16 @@
 from django.views.generic import DateDetailView, DetailView
+from django.contrib.sites.models import get_current_site
 from events.models import Event
 
 
 class EventDetailMixin(object):
     model = Event
     context_object_name = 'event'
+
+    def get_queryset(self):
+        return self.model.objects.filter(
+            sites__id__exact=get_current_site(self.request).pk
+        )
 
 class EventDetailView(EventDetailMixin, DateDetailView):
     allow_future = True
@@ -17,4 +23,4 @@ class EventDetailView(EventDetailMixin, DateDetailView):
 
 class LastEventDetailView(EventDetailMixin, DetailView):
     def get_object(self):
-        return self.model.objects.order_by('-date')[0]
+        return self.get_queryset().order_by('-date')[0]
