@@ -7,11 +7,13 @@
   <h4>Dátum konania: {{ event.date|date:"j. n. Y" }}</h4>
   {% if event.get_grouped_lectures %}
     <ul class="event_schedule">
-      <li><span class="lecture_time">9:47</span>
-        <ul><li>
-          <p>Otvorenie Akadémie Trojstenu v&nbsp;posluchárni A</p>
-        </li></ul>
-      </li>
+      {% if site.domain == "akademia.trojsten.sk" %}
+        <li><span class="lecture_time">9:47</span>
+          <ul><li>
+            <p>Otvorenie Akadémie Trojstenu v&nbsp;posluchárni A</p>
+          </li></ul>
+        </li>
+      {% endif %}
       {% for time, lectures in event.get_grouped_lectures.items %}
         <li><span class="lecture_time">{{ time|time:"H:i" }}</span>
           <ul>
