@@ -28,11 +28,13 @@ class School(models.Model):
 
 class AdditionalUserDetails(models.Model):
     user = models.OneToOneField('auth.User')
-    school = models.ForeignKey(School, default=1,
+    school = models.ForeignKey(School, default=1, verbose_name="škola",
                                help_text='Pokiaľ vaša škola nie je '
                                'v&nbsp;zozname, vyberte "Gymnázium iné" '
                                'a&nbsp;pošlite nám e-mail.')
-    is_teacher = models.BooleanField(verbose_name="som učiteľ")
+    is_teacher = models.BooleanField(verbose_name="som učiteľ",
+                                     help_text='Učitelia vedia hromadne '
+                                     'prihlasovať školy na akcie.')
 
     class Meta:
         verbose_name = "dodatočné údaje o užívateľoch"
