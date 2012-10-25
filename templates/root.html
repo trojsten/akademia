@@ -30,6 +30,9 @@
                         <li>
                             {% include "ksp_login/parts/login_box.html" %}
                         </li>
+                        <li>
+                            <a id="feed_link" href="{% url "news_feed" %}"><img src="{{ STATIC_URL }}img/feed-128.png" alt="Feed noviniek" title="Feed noviniek" /></a>
+                        </li>
                     </ul>
                 </div>
                 <div style="clear:both;"></div>

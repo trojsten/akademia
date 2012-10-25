@@ -284,6 +284,10 @@ ul.event_schedule, ul.event_schedule ul {
 	text-decoration: underline;
 }
 
+#feed_link img {
+  width: 32px;
+}
+
 /* Footer */
 
 #footer {
