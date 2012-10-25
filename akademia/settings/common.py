@@ -3,7 +3,7 @@ import os
 import akademia
 
 PROJECT_DIR, PROJECT_MODULE_NAME = os.path.split(
-    os.path.dirname(os.path.realpath(akademia.__file__))
+    os.path.dirname(os.path.dirname(os.path.realpath(akademia.__file__)))
 )
 
 DEBUG = False
