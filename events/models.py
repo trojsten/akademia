@@ -6,15 +6,15 @@ from django.utils.datastructures import SortedDict
 
 
 class School(models.Model):
-    abbreviation = models.CharField(max_length=23,
+    abbreviation = models.CharField(max_length=100,
                                     blank=True,
                                     verbose_name="skratka",
                                     help_text="Sktatka názvu školy.")
-    verbose_name = models.CharField(max_length=47,
+    verbose_name = models.CharField(max_length=100,
                                     verbose_name="celý názov")
-    addr_name = models.CharField(max_length=47, blank=True)
-    street = models.CharField(max_length=47, blank=True)
-    city = models.CharField(max_length=47, blank=True)
+    addr_name = models.CharField(max_length=100, blank=True)
+    street = models.CharField(max_length=100, blank=True)
+    city = models.CharField(max_length=100, blank=True)
     zip_code = models.CharField(max_length=10, blank=True)
 
     class Meta:
@@ -47,7 +47,7 @@ def choose_invitation_filename(instance, original):
 
 
 class Event(models.Model):
-    name = models.CharField(max_length="47",
+    name = models.CharField(max_length=100,
                             help_text="Názov akcie, napr. Klub Trojstenu "
                             "po Náboji FKS")
     date = models.DateField(unique=True)
@@ -83,7 +83,7 @@ class Event(models.Model):
 class Lecture(models.Model):
     event = models.ForeignKey(Event, verbose_name="akcia",
                               related_name="lectures")
-    lecturer = models.CharField(max_length=47, verbose_name="prednášajúci")
+    lecturer = models.CharField(max_length=100, verbose_name="prednášajúci")
     title = models.CharField(max_length=147, verbose_name="názov prednášky")
     abstract = models.TextField(blank=True, verbose_name="abstrakt")
     room = models.CharField(max_length=20, verbose_name="miestnosť")
