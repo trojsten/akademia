@@ -1,12 +1,14 @@
+from __future__ import absolute_import
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.views.generic.base import RedirectView
+
+from akademia.views import IndexView
 
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', RedirectView.as_view(url='/news/page/1/')),
+    url(r'^$', IndexView.as_view()),
     url(r'^news/', include('news.urls')),
     url(r'^events/', include('events.urls')),
     url(r'^account/', include('ksp_login.urls')),
