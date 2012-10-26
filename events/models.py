@@ -36,7 +36,8 @@ class AdditionalUserDetails(models.Model):
                                      help_text='Učitelia vedia hromadne '
                                      'prihlasovať školy na akcie.')
     graduation = models.IntegerField(blank=True, null=True,
-                                     verbose_name="rok maturity")
+                                     verbose_name="rok maturity",
+                                     help_text="Povinné pre žiakov.")
     want_news = models.BooleanField(verbose_name="pozvánky e-mailom",
                                     help_text="Mám záujem dostávať "
                                     "e-mailom pozvánky na ďalšie akcie.")
