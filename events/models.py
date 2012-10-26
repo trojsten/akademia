@@ -1,7 +1,7 @@
 # coding: utf-8
 from __future__ import unicode_literals
 from django.db import models
-from django.contrib.sites.models import Site
+from django.contrib.sites.models import Site, get_current_site
 from django.utils.datastructures import SortedDict
 
 
@@ -106,3 +106,11 @@ class Lecture(models.Model):
 
     def __unicode__(self):
         return "%s: %s" % (self.lecturer, self.title)
+
+
+def get_latest_event(request):
+    """
+    Returns the latest event relevant for the current site.
+    """
+    site = get_current_site(request)
+    return Event.objects.filter(sites__id__exact=site.pk).order_by('-date')[0]
