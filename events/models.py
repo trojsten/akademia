@@ -114,3 +114,50 @@ def get_latest_event(request):
     """
     site = get_current_site(request)
     return Event.objects.filter(sites__id__exact=site.pk).order_by('-date')[0]
+
+
+class IndividualSignup(models.Model):
+    event = models.ForeignKey(Event, verbose_name="akcia")
+    user = models.ForeignKey('auth.User')
+    lunch = models.BooleanField(verbose_name="obed",
+                                help_text="Mám záujem o obed po akcii")
+
+    class Meta:
+        verbose_name = "prihláška jednotlivca"
+        verbose_name_plural = "prihlášky jednotlivcov"
+
+    def __unicode__(self):
+        return "%s, %s" % (self.user, self.event)
+
+
+class IndividualOvernightSignup(IndividualSignup):
+    sleepover = models.BooleanField(verbose_name="chcem prespať",
+                                    help_text="Prespávanie bude v lodenici "
+                                    "alebo v telocvični za poplatok, ktorý "
+                                    "určí na mieste doc. Potočný.")
+    sleeping_bag = models.BooleanField(verbose_name="spacák",
+                                       help_text="Mám záujem požičať si "
+                                       "spacák. Spacákov je obmedzené "
+                                       "množstvo, takže pokiaľ môžete, "
+                                       "radšej si doneste vlastné.")
+    sleeping_pad = models.BooleanField(verbose_name="karimatka",
+                                       help_text="Mám záujem požičať si "
+                                       "karimatku. Karimatiek je obmedzené "
+                                       "množstvo, takže pokiaľ môžete, "
+                                       "radšej si doneste vlastné.")
+    game_participation = models.BooleanField(verbose_name="zúčastním sa hry")
+
+
+class SchoolSignup(models.Model):
+    event = models.ForeignKey(Event, verbose_name="akcia")
+    user = models.ForeignKey('auth.User')
+    students1 = models.PositiveSmallIntegerField(default=0,
+                                                 verbose_name="počet prvákov")
+    students2 = models.PositiveSmallIntegerField(default=0,
+                                                 verbose_name="počet druhákov")
+    students3 = models.PositiveSmallIntegerField(default=0,
+                                                 verbose_name="počet tretiakov")
+    students4 = models.PositiveSmallIntegerField(default=0,
+                                                 verbose_name="počet štvrtákov")
+    lunches = models.PositiveSmallIntegerField(default=0,
+                                               verbose_name="počet obedov")
