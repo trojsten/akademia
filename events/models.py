@@ -35,6 +35,11 @@ class AdditionalUserDetails(models.Model):
     is_teacher = models.BooleanField(verbose_name="som učiteľ",
                                      help_text='Učitelia vedia hromadne '
                                      'prihlasovať školy na akcie.')
+    graduation = models.IntegerField(blank=True, null=True,
+                                     verbose_name="rok maturity")
+    want_news = models.BooleanField(verbose_name="pozvánky e-mailom",
+                                    help_text="Mám záujem dostávať "
+                                    "e-mailom pozvánky na ďalšie akcie.")
 
     class Meta:
         verbose_name = "dodatočné údaje o užívateľoch"
