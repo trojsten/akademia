@@ -60,7 +60,8 @@ class Event(models.Model):
                             "po Náboji FKS")
     date = models.DateField(unique=True)
     deadline = models.DateTimeField(help_text="Deadline na prihlasovanie")
-    invitation = models.FileField(upload_to="invitations", blank=True,
+    invitation = models.FileField(upload_to=choose_invitation_filename,
+                                  blank=True,
                                   help_text="PDF s pozvánkou, keď bude "
                                   "hotová.")
     sites = models.ManyToManyField(Site)
