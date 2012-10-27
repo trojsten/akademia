@@ -174,8 +174,15 @@ def get_signup_model(request):
     Returns the signup model relevant to current site and the logged in
     user's settings.
     """
-    if get_current_site(request).domain == 'akademia.trojsten.sk':
-        if request.user.additional_events_details.is_teacher:
-            return SchoolSignup
-        return IndividualSignup
-    return IndividualOvernightSignup
+    try:
+        return request._akademia_events_signup_model
+    except AttributeError:
+        if get_current_site(request).domain == 'akademia.trojsten.sk':
+            if request.user.additional_events_details.is_teacher:
+                model = SchoolSignup
+            else:
+                model = IndividualSignup
+        else:
+            model = IndividualOvernightSignup
+        request._akademia_events_signup_model = model
+        return model
