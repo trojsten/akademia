@@ -1,8 +1,10 @@
 # coding: utf-8
 from __future__ import unicode_literals
+
 from django.db import models
 from django.contrib.sites.models import Site, get_current_site
 from django.utils.datastructures import SortedDict
+from django.utils.timezone import now
 
 
 class School(models.Model):
@@ -27,7 +29,8 @@ class School(models.Model):
 
 
 class AdditionalUserDetails(models.Model):
-    user = models.OneToOneField('auth.User')
+    user = models.OneToOneField('auth.User',
+                                related_name='additional_events_details')
     school = models.ForeignKey(School, default=1, verbose_name="škola",
                                help_text='Pokiaľ vaša škola nie je '
                                'v&nbsp;zozname, vyberte "Gymnázium iné" '
@@ -87,6 +90,9 @@ class Event(models.Model):
                 result.setdefault(lecture.time, []).append(lecture)
             self._grouped_lectures_cache = result
             return result
+
+    def signup_period_open(self):
+        return now() < self.deadline
 
 
 class Lecture(models.Model):
@@ -161,3 +167,15 @@ class SchoolSignup(models.Model):
                                                  verbose_name="počet štvrtákov")
     lunches = models.PositiveSmallIntegerField(default=0,
                                                verbose_name="počet obedov")
+
+
+def get_signup_model(request):
+    """
+    Returns the signup model relevant to current site and the logged in
+    user's settings.
+    """
+    if get_current_site(request).domain == 'akademia.trojsten.sk':
+        if request.user.additional_events_details.is_teacher:
+            return SchoolSignup
+        return IndividualSignup
+    return IndividualOvernightSignup
