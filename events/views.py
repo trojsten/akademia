@@ -7,7 +7,6 @@ from django.views.generic.edit import ModelFormMixin
 from django.contrib import messages
 from django.contrib.sites.models import get_current_site
 
-from events.decorators import class_view_decorator
 from events.forms import get_signup_form
 from events.models import Event, get_latest_event, get_signup_model
 

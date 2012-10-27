@@ -1,1 +1,8 @@
 - current site in the feed, its link in the template
+- sidebar menu
+- different colorschemes for different sites
+- eliminate white-colored sides
+- ksp_login oslovenie
+- links between sites
+- UNIT TESTZ!
+- MAX_YEAR = datetime.date.today() + 10 years
