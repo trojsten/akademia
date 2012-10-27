@@ -56,13 +56,14 @@
         <h3>Odhlásenie z&nbsp;akcie</h3>
         <form action="" method="post">
           {% csrf_token %}
-          <input type="submit" name="sign_out" value="Neprídem{% if request.user.additional_events_details.is_teacher %}e{% endif %}" />
+          <input type="submit" name="sign_out" value="Neprídem{% if signup_form.is_plural %}e{% endif %}" />
         </form>
       {% endif %}
     {% else %}
       <p>
         Najprv sa treba <a href="{% url "account_login" %}">prihlásiť na
         stránku</a>.
+      </p>
     {% endif %}
   {% else %}
     <p>Prihlasovanie na túto akciu už bolo uzavreté.</p>

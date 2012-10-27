@@ -59,6 +59,8 @@ def register_additional_user_details_form(sender, **kwargs):
 
 
 class SignupFormMixin(object):
+    is_plural = False
+
     def __init__(self, *args, **kwargs):
         request = kwargs.pop('request')
         self.event = get_latest_event(request)
@@ -93,6 +95,8 @@ class IndividualOvernightSignupFormMixin(SignupFormMixin):
 
 
 class SchoolSignupFormMixin(SignupFormMixin):
+    is_plural = True
+
     def clean(self):
         data = self.cleaned_data
         signed_up = sum(data.get('students%d' % (i,), 0) for i in range(1,5))
