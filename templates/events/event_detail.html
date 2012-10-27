@@ -35,9 +35,9 @@
   {% endif %}
   {% if event.signup_period_open %}
     {% if is_signed_up %}
-      <h3>Zmena prihlášky na akciu</h3>
+      <h2>Zmena prihlášky na akciu</h2>
     {% else %}
-      <h3>Prihlásenie na akciu</h3>
+      <h2>Prihlásenie na akciu</h2>
     {% endif %}
     {% if user.is_authenticated %}
       <form action="" method="post">
@@ -53,10 +53,17 @@
         </table>
       </form>
       {% if is_signed_up %}
-        <h3>Odhlásenie z&nbsp;akcie</h3>
+        <h2>Odhlásenie z&nbsp;akcie</h2>
         <form action="" method="post">
           {% csrf_token %}
-          <input type="submit" name="sign_out" value="Neprídem{% if signup_form.is_plural %}e{% endif %}" />
+          <table>
+            <tr>
+              <th />
+              <td>
+                <input type="submit" name="sign_out" value="Neprídem{% if signup_form.is_plural %}e{% endif %}" />
+              </td>
+            </tr>
+          </table>
         </form>
       {% endif %}
     {% else %}

@@ -45,9 +45,33 @@ a:hover {
 	text-decoration: none;
 }
 
+/* Forms */
+
+form table th {
+  text-align: right;
+  vertical-align: top;
+  width: 12em;
+}
+
+form .helptext {
+  font-size: .9em;
+  font-style: italic;
+}
+
 input[type=text], input[type=password] {
   width: 20em;
 }
+
+ul.errorlist {
+  background-color: #fdd;
+  list-style-type: none;
+}
+
+ul.errorlist > li {
+  padding-right: 2em;
+}
+
+/* Root */
 
 #root {
 	margin: 0 auto;
@@ -163,6 +187,20 @@ input[type=text], input[type=password] {
 	width: 660px;
 	padding: 0px 0px 0px 0px;
 	background: #FFFFFF;
+}
+
+#content h2 {
+  padding-bottom: .5ex;
+  margin-bottom: 30px;
+	border-bottom: 1px solid #BBBBBB;
+}
+
+#content > div.article, #content > p {
+  margin-bottom: 30px;
+}
+
+#content > div.article > p, #content > p {
+  text-align: justify;
 }
 
 /* News */
