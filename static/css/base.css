@@ -203,6 +203,41 @@ ul.errorlist > li {
   text-align: justify;
 }
 
+/* Messages */
+
+ul.messages {
+  list-style: none;
+  padding: 0 0 0 0;
+}
+
+ul.messages > li {
+  display: block;
+  padding: .5em;
+  width: 100%;
+  border: 1px solid;
+  margin-top: 5px;
+}
+
+ul.messages > li.info {
+  background-color: #ddf;
+  border-color: #00c;
+}
+
+ul.messages > li.success {
+  background-color: #dfd;
+  border-color: #0c0;
+}
+
+ul.messages > li.warning {
+  background-color: #ff7;
+  border-color: #aa0;
+}
+
+ul.messages > li.error {
+  background-color: #fdd;
+  border-color: #c00;
+}
+
 /* News */
 
 .news_entry {

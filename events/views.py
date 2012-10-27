@@ -1,8 +1,10 @@
+# coding: utf-8
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.views.generic import DateDetailView, DetailView, FormView
 from django.views.generic.edit import ModelFormMixin
+from django.contrib import messages
 from django.contrib.sites.models import get_current_site
 
 from events.decorators import class_view_decorator
@@ -55,12 +57,16 @@ def latest_event_detail(request, success_redirect='event_latest'):
                 # nothing.
                 if signup_instance:
                     signup_instance.delete()
-                    # TODO: add a message
+                    messages.success(request, "Úspešne odhlásené z akcie.")
                     return redirect(success_redirect)
             form = form_class(request.POST, instance=signup_instance,
                               request=request)
             if form.is_valid():
                 form.save()
+                if signup_instance:
+                    messages.success(request, "Úspešne zmenená prihláška.")
+                else:
+                    messages.success(request, "Úspešne prihlásené na akciu.")
                 return redirect(success_redirect)
         else:
             form = form_class(instance=signup_instance, request=request)
