@@ -4,6 +4,7 @@
 {% block title %}Program: {{ event }}{% endblock title %}
 
 {% block content %}
+  <a href="#signup">Ohlásenie účasti</a><br />
   <h4>Dátum konania: {{ event.date|date:"j. n. Y" }}</h4>
   {% if event.get_grouped_lectures %}
     <ul class="event_schedule">
@@ -33,6 +34,7 @@
   {% else %}
     <p>Pre túto akciu ešte nemáme program...</p>
   {% endif %}
+  <a id="signup"></a>
   {% if event.signup_period_open %}
     {% if is_signed_up %}
       <h2>Zmena prihlášky na akciu</h2>
