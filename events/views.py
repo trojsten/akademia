@@ -160,6 +160,7 @@ def latest_event_detail(request, success_redirect='event_latest'):
         context.update({
             'signup_form': form,
             'is_signed_up': signup_instance is not None,
+            'do_signups': True,
         })
 
     return TemplateResponse(request=request,
