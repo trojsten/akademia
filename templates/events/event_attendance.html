@@ -2,8 +2,11 @@
 
 {% block title %}Zoznam účastníkov: {{ event }}{% endblock title %}
 
-{% block content %}
+{% block content_top_navigation %}
   <a href="{{ event.get_absolute_url }}">Naspäť na program</a>
+{% endblock content_top_navigation %}
+
+{% block content %}
   {% if school_signups %}
     <h2>Nahlásené školy</h2>
     <table>

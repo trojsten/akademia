@@ -5,6 +5,10 @@
 
 {% block content_root %}
     <h1>{% block title %}{% endblock title %}</h1>
+    <div id="content_top_navigation">
+        {% block content_top_navigation %}
+        {% endblock content_top_navigation %}
+    </div>
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
