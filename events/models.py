@@ -108,17 +108,23 @@ class Event(models.Model):
             return reverse("event_detail", kwargs={
                                'year': self.date.year,
                                'month': self.date.month,
-                               'day': self.date.day
+                               'day': self.date.day,
                            })
         # Else just return the link to the latest event.
         return reverse("event_latest")
 
     def get_attendance_url(self):
+        return "/events/%04d/%02d/%02d/attendance/" % (
+            self.date.year, self.date.month, self.date.day,
+        )
+        # For some reason the following doesn't work ON ONE OF THE SITES.
+        """
         return reverse("event_attendance", kwargs={
                            'year': self.date.year,
                            'month': self.date.month,
-                           'day': self.date.day
+                           'day': self.date.day,
                        })
+        """
 
     def get_grouped_lectures(self):
         """
