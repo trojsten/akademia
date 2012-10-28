@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Zoznam účastníkov: {{ event }}{% endblock title %}
+
+{% block content %}
+  <a href="{{ event.get_absolute_url }}">Naspäť na program</a>
+  {% if school_signups %}
+    <h2>Nahlásené školy</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Názov školy</th>
+          <th>Mesto</th>
+          <th>Počet žiakov</th>
+          <th>Učiteľ</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for school in school_signups %}
+          <tr>
+            <td>{{ school.school.verbose_name }}</td>
+            <td>{{ school.school.city }}</td>
+            <td>{{ school.signup.get_total_students }}</td>
+            <td>{{ school.teacher.get_full_name }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+  <h2>Nahlásení jednotlivci</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Meno</th>
+        <th>Škola</th>
+        <th>Mesto</th>
+        <th>Ročník</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for individual in individual_signups %}
+        <tr>
+          <td>{{ individual.user.get_full_name }}</td>
+          <td>{{ individual.school.verbose_name }}</td>
+          <td>{{ individual.school.city }}</td>
+          <td>{{ individual.grade }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

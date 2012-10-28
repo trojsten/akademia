@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 
-from events.views import EventDetailView, latest_event_detail
+from events.views import EventDetailView, AttendanceView, latest_event_detail
 
 
 urlpatterns = patterns("",
@@ -8,4 +8,7 @@ urlpatterns = patterns("",
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/$',
         EventDetailView.as_view(), kwargs={'slug': ''},
         name="event_detail"),
+    url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/attendance/$',
+        AttendanceView.as_view(), kwargs={'slug': ''},
+        name="event_attendance"),
 )

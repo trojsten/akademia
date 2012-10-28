@@ -195,7 +195,7 @@ ul.errorlist > li {
 	border-bottom: 1px solid #BBBBBB;
 }
 
-#content > div.article, #content > p {
+#content > div.article, #content > p, #content > table {
   margin-bottom: 30px;
 }
 

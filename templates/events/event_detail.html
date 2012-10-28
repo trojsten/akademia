@@ -4,7 +4,8 @@
 {% block title %}Program: {{ event }}{% endblock title %}
 
 {% block content %}
-  <a href="#signup">Ohlásenie účasti</a><br />
+  <a href="#signup">Ohlásenie účasti</a> |
+  <a href="{{ event.get_attendance_url }}">Zoznam nahlásených účastníkov</a><br />
   <h4>Dátum konania: {{ event.date|date:"j. n. Y" }}</h4>
   {% if event.get_grouped_lectures %}
     <ul class="event_schedule">

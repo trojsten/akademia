@@ -1,4 +1,7 @@
 # coding: utf-8
+from collections import defaultdict
+import logging
+
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
@@ -25,6 +28,90 @@ class EventDetailView(DateDetailView):
         return self.model.objects.filter(
             sites__id__exact=get_current_site(self.request).pk
         )
+
+
+class AttendanceView(EventDetailView):
+    """
+    Displays an overview of people attending to a specific event.
+    """
+    template_name_suffix = '_attendance'
+
+    def get_context_data(self, **kwargs):
+        context = super(AttendanceView, self).get_context_data(**kwargs)
+
+        site = get_current_site(self.request)
+        overnight_stats = (defaultdict(int)
+                           if site.domain == 'klub.trojsten.sk' else None)
+        stats = {
+            'grades': defaultdict(int),
+            'total': 0,
+            'lunches': 0,
+        }
+        seen_school_ids = set()
+
+        school_list = self.object.school_signups.select_related(
+                'user__additional_events_details__school')
+        preprocessed_schools = []
+
+        for school in school_list:
+            seen_school_ids.add(school.user.additional_events_details.school_id)
+            stats['lunches'] += school.lunches
+            # The +1 is for the teacher.
+            stats['total'] += 1
+            for grade in range(1, 5):
+                students = getattr(school, "students%d" % (grade,))
+                stats['grades'][grade] += students
+                stats['total'] += students
+            preprocessed_schools.append({
+                'school': school.user.additional_events_details.school,
+                'teacher': school.user,
+                'signup': school,
+            })
+
+        individual_list = self.object.individual_signups.select_related(
+                'user__additional_events_details__school')
+        preprocessed_individuals = []
+
+        for individual in individual_list:
+            user_details = individual.user.additional_events_details
+            grade = user_details.get_grade(self.object.date)
+            # If the user's school has a mass signup, don't count this one
+            # in the statistics.
+            if user_details.school_id not in seen_school_ids:
+                # Only count relevant grades.
+                if -2 <= grade <= 4:
+                    stats['grades'][user_details.get_grade(self.object.date)] += 1
+                stats['total'] += 1
+                stats['lunches'] += 1
+                if overnight_stats is not None:
+                    try:
+                        signup = individual.individualovernightsignup
+                        overnight_stats['oversleeping'] += int(signup.sleepover)
+                        overnight_stats['sleeping_pads'] += int(signup.sleeping_pad)
+                        overnight_stats['sleeping_bags'] += int(signup.sleeping_bag)
+                        overnight_stats['game_participants'] += int(signup.game_participation)
+                    except IndividualOvernightSignup.DoesNotExist:
+                        logging.warning("Signup %d for user %s and event %s "
+                                        "doesn't include overnight info." %
+                                        (individual.pk, individual.user,
+                                         individual.event), exc_info=True)
+            preprocessed_individuals.append({
+                'user': individual.user,
+                'user_details': user_details,
+                'school': user_details.school,
+                'grade': grade,
+            })
+
+        if overnight_stats is not None:
+            stats.update(overnight_stats)
+
+        context.update({
+            'school_signups': preprocessed_schools,
+            'individual_signups': preprocessed_individuals,
+            'signup_stats': stats,
+        })
+
+        return context
 
 
 def latest_event_detail(request, success_redirect='event_latest'):

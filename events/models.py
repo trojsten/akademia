@@ -1,10 +1,16 @@
 # coding: utf-8
 from __future__ import unicode_literals
+import datetime
 
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.contrib.sites.models import Site, get_current_site
 from django.utils.datastructures import SortedDict
 from django.utils.timezone import now
+
+
+# In which grade does a high school student graduate?
+GRADUATION_GRADE = 4
 
 
 class School(models.Model):
@@ -52,6 +58,22 @@ class AdditionalUserDetails(models.Model):
     def __unicode__(self):
         return "%s" % (self.user,)
 
+    def get_grade(self, date=None):
+        """
+        Returns the school grade based on graduation_year and the provided
+        date. If no date is provided, today is used.
+        """
+        if date is None:
+            date = datetime.date.today()
+        # Normalize the given date's year to the one in which the closest
+        # following graduation happens.
+        # For simplicity, we assume graduation happens every year on the
+        # first day of July.
+        if date.month >= 7:
+            date = date.replace(year=date.year + 1)
+        years_to_graduation = self.graduation - date.year
+        return GRADUATION_GRADE - years_to_graduation
+
 
 def choose_invitation_filename(instance, original):
     return "invitations/%s.pdf" % (instance.date.isoformat(),)
@@ -76,6 +98,27 @@ class Event(models.Model):
 
     def __unicode__(self):
         return "%s %s" % (self.name, self.date.year)
+
+    def get_absolute_url(self):
+        # We need to check if the event is the latest for this page and we
+        # don't have access to the request to just call get_latest_event.
+        if Event.objects.filter(sites__id__in=self.sites.all(),
+                               date__gt=self.date).count() > 0:
+            # There are newer relevant events, generate a general URL.
+            return reverse("event_detail", kwargs={
+                               'year': self.date.year,
+                               'month': self.date.month,
+                               'day': self.date.day
+                           })
+        # Else just return the link to the latest event.
+        return reverse("event_latest")
+
+    def get_attendance_url(self):
+        return reverse("event_attendance", kwargs={
+                           'year': self.date.year,
+                           'month': self.date.month,
+                           'day': self.date.day
+                       })
 
     def get_grouped_lectures(self):
         """
@@ -123,7 +166,8 @@ def get_latest_event(request):
 
 
 class IndividualSignup(models.Model):
-    event = models.ForeignKey(Event, verbose_name="akcia")
+    event = models.ForeignKey(Event, verbose_name="akcia",
+                              related_name="individual_signups")
     user = models.ForeignKey('auth.User')
     lunch = models.BooleanField(verbose_name="obed",
                                 help_text="Mám záujem o obed po akcii")
@@ -155,7 +199,8 @@ class IndividualOvernightSignup(IndividualSignup):
 
 
 class SchoolSignup(models.Model):
-    event = models.ForeignKey(Event, verbose_name="akcia")
+    event = models.ForeignKey(Event, verbose_name="akcia",
+                              related_name="school_signups")
     user = models.ForeignKey('auth.User')
     students1 = models.PositiveSmallIntegerField(default=0,
                                                  verbose_name="počet prvákov")
@@ -167,6 +212,9 @@ class SchoolSignup(models.Model):
                                                  verbose_name="počet štvrtákov")
     lunches = models.PositiveSmallIntegerField(default=0,
                                                verbose_name="počet obedov")
+
+    def get_total_students(self):
+        return self.students1 + self.students2 + self.students3 + self.students4
 
 
 def get_signup_model(request):
