@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 import datetime
 
-from django.core.urlresolvers import reverse
 from django.db import models
 from django.contrib.sites.models import Site, get_current_site
 from django.utils.datastructures import SortedDict
@@ -99,32 +98,28 @@ class Event(models.Model):
     def __unicode__(self):
         return "%s %s" % (self.name, self.date.year)
 
+    @models.permalink
     def get_absolute_url(self):
         # We need to check if the event is the latest for this page and we
         # don't have access to the request to just call get_latest_event.
         if Event.objects.filter(sites__id__in=self.sites.all(),
                                date__gt=self.date).count() > 0:
             # There are newer relevant events, generate a general URL.
-            return reverse("event_detail", kwargs={
-                               'year': self.date.year,
-                               'month': self.date.month,
-                               'day': self.date.day,
-                           })
+            return ("event_detail", (), {
+                        'year': self.date.strftime('%Y'),
+                        'month': self.date.strftime('%m'),
+                        'day': self.date.strftime('%d'),
+                    })
         # Else just return the link to the latest event.
-        return reverse("event_latest")
+        return ("event_latest",)
 
+    @models.permalink
     def get_attendance_url(self):
-        return "/events/%04d/%02d/%02d/attendance/" % (
-            self.date.year, self.date.month, self.date.day,
-        )
-        # For some reason the following doesn't work ON ONE OF THE SITES.
-        """
-        return reverse("event_attendance", kwargs={
-                           'year': self.date.year,
-                           'month': self.date.month,
-                           'day': self.date.day,
-                       })
-        """
+        return ("event_attendance", (), {
+                    'year': self.date.strftime('%Y'),
+                    'month': self.date.strftime('%m'),
+                    'day': self.date.strftime('%d'),
+                })
 
     def get_grouped_lectures(self):
         """
