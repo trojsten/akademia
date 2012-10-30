@@ -209,6 +209,10 @@ ul.errorlist > li {
     width: 100%;
 }
 
+#content > table tr:nth-child(2n) {
+    background-color: #feddd0;
+}
+
 /* Messages */
 
 ul.messages {
