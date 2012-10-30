@@ -92,7 +92,6 @@ ul.errorlist > li {
 #logo {
         vertical-align: middle;
 	float: left;
-	width: 20em;
 	margin: 0;
 	padding: 0;
 	color: #000000;
@@ -104,7 +103,7 @@ ul.errorlist > li {
 #logo h2 {
 	letter-spacing: -1px;
 	/*text-transform: lowercase;*/
-	font-size: 2.2em;
+	font-size: 2.6em;
 	color: #0C0C0C;
 }
 
@@ -135,7 +134,6 @@ ul.errorlist > li {
 
 #menu {
 	float: right;
-	width: 50em;
 }
 
 #menu ul {
@@ -152,7 +150,7 @@ ul.errorlist > li {
 	display: block;
 	float: left;
 	height: 37px;
-	padding: 13px 30px 0px 30px;
+	padding: 13px 20px 0px 20px;
 	text-decoration: none;
 	text-transform: uppercase;
 	font-family: Arial, Helvetica, sans-serif;
