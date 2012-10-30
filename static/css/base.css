@@ -205,6 +205,10 @@ ul.errorlist > li {
   margin-bottom: 1em;
 }
 
+#content > table {
+    width: 100%;
+}
+
 /* Messages */
 
 ul.messages {
