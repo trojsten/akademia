@@ -11,10 +11,40 @@
   {% else %}
     <h2>{% trans "Posledná akcia" context site.name %}</h2>
   {% endif %}
-  <li><a href="{{ latest_event.get_absolute_url }}">Program</a></li>
-  <li><a href="{{ latest_event.get_absolute_url }}#signup">Nahlásenie účasti</a></li>
-  <li><a href="{{ latest_event.get_attendance_url }}">Zoznam nahlásených
-      účastníkov</a></li>
+  <ul>
+    <li><a href="{{ latest_event.get_absolute_url }}">Program</a></li>
+    {% if latest_event.signup_period_open %}
+      <li><a href="{{ latest_event.get_absolute_url }}#signup">Nahlásenie účasti</a></li>
+    {% endif %}
+    <li><a href="{{ latest_event.get_attendance_url }}">Zoznam nahlásených
+        účastníkov</a></li>
+  </ul>
+</li>
+<li>
+  <h2>Navigácia</h2>
+  <ul>
+    <li><a href="/">Čo je {{ site.name }}</a></li>
+    <li><a href="{% url "news_list" page=1 %}">Novinky</a></li>
+    <li><a href="/instructions/">Organizačné pokyny</a></li>
+    {% if site.domain == "akademia.trojsten.sk" %}
+      <li><a href="/live-stream/">Online prenos</a></li>
+    {% endif %}
+    <li><a href="/contact/">Kontakt</a></li>
+  </ul>
+</li>
+<li>
+  <h2>Ďalšie stránky</h2>
+  <ul>
+    {% if site.domain == "akademia.trojsten.sk" %}
+      <li><a href="http://klub.trojsten.sk/">Klub Trojstenu</a></li>
+    {% else %}
+      <li><a href="http://akademia.trojsten.sk/">Akadémia Trojstenu</a></li>
+    {% endif %}
+    <li><a href="http://trojsten.sk/">Občianske združenie Trojsten</a></li>
+    <li><a href="http://fks.sk/">Fyzikálny korešpondenčný seminár</a></li>
+    <li><a href="http://kms.sk/">Korešpondenčný matematický seminár</a></li>
+    <li><a href="http://ksp.sk/">Korešpondenčný seminár z&nbsp;programovania</a></li>
+  </ul>
 </li>
 <li>
   <a id="feed_link" href="{% url "news_feed" %}">
