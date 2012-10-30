@@ -1,8 +1,11 @@
 {% load url from future %}
+{% load events %}
+{% url "news_list" page=1 as news_url %}
+{% url "event_latest" as latest_event_url %}
 <ul>
-  <li><a href="/">Domov</a></li>
-  <li><a href="{% url "news_list" page=1 %}">Novinky</a></li>
-  <li><a href="{% url "event_latest" %}">Program</a></li>
-  <li><a href="/instructions/">Organizačné</a></li>
-  <li><a href="/contact/">Kontakt</a></li>
+  <li class="{% active_page_class "/" %}"><a href="/">Domov</a></li>
+  <li class="{% active_page_class news_url %}"><a href="{{ news_url }}">Novinky</a></li>
+  <li class="{% active_page_class latest_event_url %}"><a href="{{ latest_event_url }}">Program</a></li>
+  <li class="{% active_page_class "/instructions/" %}"><a href="/instructions/">Organizačné</a></li>
+  <li class="{% active_page_class "/contact/" %}"><a href="/contact/">Kontakt</a></li>
 </ul>

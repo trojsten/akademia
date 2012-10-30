@@ -161,13 +161,13 @@ ul.errorlist > li {
 	color: #0C0C0C;
 }
 
-#menu a:hover, #menu .current_page_item a {
+#menu a:hover, #menu .active a {
 	background: #EB1D1D;
 	text-decoration: none;
 	color: #FFFFFF;
 }
 
-#menu .current_page_item a {
+#menu .active a {
 	color: #FFFFFF;
 }
 
