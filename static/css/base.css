@@ -73,16 +73,16 @@ ul.errorlist > li {
 
 /* Root */
 
-#root {
-	margin: 0 auto;
-	padding: 0;
+#body_wrapper {
+    width: 70em;
+    margin: 0 auto;
+    padding: 0;
 }
 
 /* Header */
 
 #header {
 	overflow: hidden;
-	width: 1000px;
 	height: 50px;
 	margin: 0px auto 20px auto;
 }
@@ -90,8 +90,9 @@ ul.errorlist > li {
 /* Logo */
 
 #logo {
+        vertical-align: middle;
 	float: left;
-	width: 300px;
+	width: 20em;
 	margin: 0;
 	padding: 0;
 	color: #000000;
@@ -103,7 +104,7 @@ ul.errorlist > li {
 #logo h2 {
 	letter-spacing: -1px;
 	/*text-transform: lowercase;*/
-	font-size: 2.5em;
+	font-size: 2.2em;
 	color: #0C0C0C;
 }
 
@@ -117,7 +118,6 @@ ul.errorlist > li {
 
 #logo p {
 	margin: -5px 0px 0px 0px;
-	padding: 0px 0 0 px;
 	text-transform: lowercase;
 	font: normal 14px Georgia, "Times New Roman", Times, serif;
 	font-style: italic;
@@ -135,7 +135,7 @@ ul.errorlist > li {
 
 #menu {
 	float: right;
-	width: 700px;
+	width: 50em;
 }
 
 #menu ul {
@@ -174,7 +174,6 @@ ul.errorlist > li {
 /* Main */
 
 #main {
-	width: 1000px;
 	margin: 0 auto;
 	padding: 40px 0px 0px 0px;
 	border-top: 1px solid #BBBBBB;
@@ -184,7 +183,7 @@ ul.errorlist > li {
 
 #content {
 	float: left;
-	width: 660px;
+	width: 66%;
 	padding: 0px 0px 0px 0px;
 	background: #FFFFFF;
 }
@@ -298,7 +297,7 @@ ul.event_schedule, ul.event_schedule ul {
 
 #sidebar {
 	float: right;
-	width: 300px;
+	width: 30%;
 	margin: 0px;
 	padding: 0px 0px 0px 0px;
 }
@@ -336,6 +335,10 @@ ul.event_schedule, ul.event_schedule ul {
 	font-style: italic;
 }
 
+#sidebar .ksp_login_provider_list_js > li {
+    border: none;
+}
+
 #sidebar h2 {
 	height: 30px;
 	margin: 0px 0px 20px 0px;
@@ -368,9 +371,7 @@ ul.event_schedule, ul.event_schedule ul {
 /* Footer */
 
 #footer {
-	width: 1000px;
 	height: 50px;
-	margin: 0 auto;
 	padding: 0px 0 15px 0;
 	border-top: 1px solid #BBBBBB;
 	font-family: Arial, Helvetica, sans-serif;
