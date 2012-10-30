@@ -27,19 +27,14 @@
                 </div>
                 <div id="sidebar">
                     <ul>
-                        <li>
-                            {% include "ksp_login/parts/login_box.html" %}
-                        </li>
-                        <li>
-                            <a id="feed_link" href="{% url "news_feed" %}"><img src="{{ STATIC_URL }}img/feed-128.png" alt="Feed noviniek" title="Feed noviniek" /></a>
-                        </li>
+                      {% include "parts/sidebar.html" %}
                     </ul>
                 </div>
                 <div style="clear:both;"></div>
             </div>
         </div>
         <div id="footer">
-            <p>Copyright (c) 2012 {{ site.domain }}. All rights reserved. Design by <a href="http://www.freecsstemplates.org/">FCT</a>.</p>
+            <p>Copyright (c) 2012 {{ site.domain }}. Design by <a href="http://www.freecsstemplates.org/">FCT</a>.</p>
         </div>
         {% block scripts %}
             {% include "ksp_login/parts/include_javascript.html" %}
