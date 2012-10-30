@@ -104,6 +104,9 @@ class AttendanceView(EventDetailView):
 
         if overnight_stats is not None:
             stats.update(overnight_stats)
+            stats['overnight'] = True
+
+        stats['grades'] = sorted(stats['grades'].items())
 
         context.update({
             'school_signups': preprocessed_schools,

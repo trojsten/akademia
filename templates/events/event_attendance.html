@@ -51,4 +51,54 @@
       {% endfor %}
     </tbody>
   </table>
+  <h2>Štatistiky</h2>
+  <ul>
+    <li>
+      <span class="stats_label">Počet účastníkov:</span>
+      <span class="stats_value">{{ signup_stats.total }}</span>
+    </li>
+    {% if signup_stats.grades %}
+      <li>
+        <span class="stats_label">Rozloženie na ročníky</span>
+        <ul>
+          {% for grade, count in signup_stats.grades %}
+            <li>
+              <span class="stats_label">{{ grade }}:</span>
+              <span class="stats_value">{{ count }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endif %}
+    <li>
+      <span class="stats_label">Počet obedov:</span>
+      <span class="stats_value">{{ signup_stats.lunches }}</span>
+    </li>
+    {% if signup_stats.overnight %}
+    <li>
+      <span class="stats_label">Počet prespávajúcich:</span>
+      <span class="stats_value">{{ signup_stats.oversleeping }}</span>
+    </li>
+    <li>
+      <span class="stats_label">Počet spacákov:</span>
+      <span class="stats_value">{{ signup_stats.sleeping_bags }}</span>
+    </li>
+    <li>
+      <span class="stats_label">Počet karimatiek:</span>
+      <span class="stats_value">{{ signup_stats.sleeping_pads }}</span>
+    </li>
+    <li>
+      <span class="stats_label">Počet záujemcov o&nbsp;hru:</span>
+      <span class="stats_value">{{ signup_stats.game_participants }}</span>
+    </li>
+    {% endif %}
+  </ul>
+  {% if site.domain == "akademia.trojsten.sk" %}
+    <p>
+      Ak niekomu vŕta v&nbsp;hlave, prečo sa čísla nezhodujú
+      s&nbsp;tabuľkami, je to preto, že do celkového počtu účastníkov
+      počítame aj učiteľov a&nbsp;do štatistík nepočítame tých jednotlivcov,
+      ktorých školy už majú spravené hromadné registrácie.
+    </p>
+  {% endif %}
 {% endblock content %}
