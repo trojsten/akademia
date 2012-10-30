@@ -1,0 +1,38 @@
+# Copyright (C) 2012 Michal Petrucha
+# This file is distributed under the same license as the akademia package.
+# Michal Petrucha <michal.petrucha@ksp.sk>, 2012.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: akademia\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-10-30 01:54+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Michal Petrucha <michal.petrucha@ksp.sk>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
+
+#: templates/parts/sidebar.html:10
+msgctxt "Akadémia Trojstenu"
+msgid "Pripravovaná akcia"
+msgstr "Pripravovaná Akadémia Trojstenu"
+
+#: templates/parts/sidebar.html:10
+msgctxt "Klub Trojstenu"
+msgid "Pripravovaná akcia"
+msgstr "Pripravovaný Klub Trojstenu"
+
+#: templates/parts/sidebar.html:12
+msgctxt "Akadémia Trojstenu"
+msgid "Posledná akcia"
+msgstr "Posledná Akadémia Trojstenu"
+
+#: templates/parts/sidebar.html:12
+msgctxt "Klub Trojstenu"
+msgid "Posledná akcia"
+msgstr "Posledný Klub Trojstenu"
