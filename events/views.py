@@ -5,7 +5,7 @@ import logging
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
-from django.views.generic import DateDetailView, DetailView, FormView
+from django.views.generic import DateDetailView, DetailView
 from django.views.generic.edit import ModelFormMixin
 from django.contrib import messages
 from django.contrib.sites.models import get_current_site

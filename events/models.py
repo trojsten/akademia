@@ -135,6 +135,9 @@ class Event(models.Model):
             self._grouped_lectures_cache = result
             return result
 
+    def is_in_future(self):
+        return now().date() <= self.date
+
     def signup_period_open(self):
         return now() < self.deadline
 

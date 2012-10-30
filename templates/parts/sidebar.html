@@ -1,5 +1,20 @@
+{% load url from future %}
+{% load i18n %}
+{% load events %}
+{% get_latest_event as latest_event %}
 <li>
   {% include "ksp_login/parts/login_box.html" %}
+</li>
+<li>
+  {% if latest_event.is_in_future %}
+    <h2>{% trans "Pripravovaná akcia" context site.name %}</h2>
+  {% else %}
+    <h2>{% trans "Posledná akcia" context site.name %}</h2>
+  {% endif %}
+  <li><a href="{{ latest_event.get_absolute_url }}">Program</a></li>
+  <li><a href="{{ latest_event.get_absolute_url }}#signup">Nahlásenie účasti</a></li>
+  <li><a href="{{ latest_event.get_attendance_url }}">Zoznam nahlásených
+      účastníkov</a></li>
 </li>
 <li>
   <a id="feed_link" href="{% url "news_feed" %}">
