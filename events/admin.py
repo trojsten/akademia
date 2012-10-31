@@ -11,11 +11,21 @@ class AdditionalUserDetailsInline(admin.StackedInline):
 
 
 class UserAdmin(UserAdmin):
-    inlines = (AdditionalUserDetailsInline, )
-
-
+    inlines = (AdditionalUserDetailsInline,)
 admin.site.unregister(User)
+
+
+class LectureInline(admin.StackedInline):
+    model = Lecture
+    extra = 0
+
+
+class EventAdmin(admin.ModelAdmin):
+    model = Event
+    inlines = (LectureInline,)
+
+
 admin.site.register(User, UserAdmin)
 admin.site.register(School)
-admin.site.register(Event)
+admin.site.register(Event, EventAdmin)
 admin.site.register(Lecture)
