@@ -53,6 +53,8 @@ LOCALE_PATHS = (
     os.path.join(PROJECT_DIR, 'locale'),
 )
 
+APPEND_SLASH = True
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = ''
