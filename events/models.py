@@ -188,7 +188,9 @@ class IndividualOvernightSignup(IndividualSignup):
     sleepover = models.BooleanField(verbose_name="chcem prespať",
                                     help_text="Prespávanie bude v lodenici "
                                     "alebo v telocvični za poplatok, ktorý "
-                                    "určí na mieste doc. Potočný.")
+                                    "určí na mieste doc. Potočný. Viac v "
+                                    '<a href="/instructions/">organizačných'
+                                    " pokynoch</a>.")
     sleeping_bag = models.BooleanField(verbose_name="spacák",
                                        help_text="Mám záujem požičať si "
                                        "spacák. Spacákov je obmedzené "
