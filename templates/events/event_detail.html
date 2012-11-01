@@ -42,11 +42,13 @@
   {% endif %}
   {% if do_signups %}
     <a id="signup"></a>
-    {% if event.signup_period_open %}
+    {% if event.signup_period_open %}{% with deadline=event.deadline|date:"j. n. Y, H:i" %}
       {% if is_signed_up %}
         <h2>Zmena prihlášky na akciu</h2>
+        <p>Prihlášky sa dajú meniť do {{ deadline }}.</p>
       {% else %}
         <h2>Prihlásenie na akciu</h2>
+        <p>Prihlasovať sa dá do {{ deadline }}.</p>
       {% endif %}
       {% if user.is_authenticated %}
         <form action="" method="post">
@@ -63,6 +65,7 @@
         </form>
         {% if is_signed_up %}
           <h2>Odhlásenie z&nbsp;akcie</h2>
+          <p>Odhlasovať sa dá do {{ deadline }}.</p>
           <form action="" method="post">
             {% csrf_token %}
             <table>
@@ -81,7 +84,7 @@
           stránku</a>.
         </p>
       {% endif %}
-    {% else %}
+    {% endwith %}{% else %}
       <p>Prihlasovanie na túto akciu už bolo uzavreté.</p>
     {% endif %}
   {% endif %}
