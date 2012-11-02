@@ -13,7 +13,3 @@ urlpatterns = patterns('',
     url(r'^account/', include('ksp_login.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
-
-urlpatterns += patterns('',
-    (r'^', include('django.contrib.flatpages.urls')),
-)
