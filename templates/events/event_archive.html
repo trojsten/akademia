@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Archív{% endblock title %}
+
+{% block content %}
+  <ul>
+    {% for event in event_list %}
+      <li>
+        <a href="{{ event.get_absolute_url }}">{{ event }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock content %}

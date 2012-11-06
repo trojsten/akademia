@@ -5,7 +5,7 @@ import logging
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
-from django.views.generic import DateDetailView, DetailView
+from django.views.generic import DateDetailView, DetailView, ListView
 from django.views.generic.edit import ModelFormMixin
 from django.contrib import messages
 from django.contrib.sites.models import get_current_site
@@ -115,6 +115,15 @@ class AttendanceView(EventDetailView):
         })
 
         return context
+
+
+class ArchiveView(ListView):
+    model = Event
+    template_name_suffix = '_archive'
+
+    def get_queryset(self):
+        return self.model.objects.filter(
+                sites__id__exact=get_current_site(self.request).id)
 
 
 def latest_event_detail(request, success_redirect='event_latest'):
