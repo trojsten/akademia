@@ -46,7 +46,13 @@
           <td>{{ individual.user.get_full_name }}</td>
           <td>{{ individual.school.verbose_name }}</td>
           <td>{{ individual.school.city }}</td>
-          <td>{{ individual.grade }}</td>
+          <td>
+            {% if individual.grade > 4 %}
+              zmaturovaný
+            {% else %}
+              {{ individual.grade }}
+            {% endif %}
+          </td>
         </tr>
       {% endfor %}
     </tbody>
