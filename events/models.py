@@ -1,11 +1,14 @@
 # coding: utf-8
 from __future__ import unicode_literals
 import datetime
+import os.path
 
 from django.db import models
 from django.contrib.sites.models import Site, get_current_site
 from django.utils.datastructures import SortedDict
 from django.utils.timezone import now
+
+from events.utils import slugify
 
 
 # In which grade does a high school student graduate?
@@ -142,19 +145,35 @@ class Event(models.Model):
         return now() < self.deadline
 
 
+def choose_lecture_materials_filename(instance, original):
+    extension = os.path.splitext(original)[1]
+    event_slug = slugify(instance.event)
+    lecture_slug = slugify(instance)
+    return "%s/%s%s" % (event_slug, lecture_slug, extension)
+
+
 class Lecture(models.Model):
     event = models.ForeignKey(Event, verbose_name="akcia",
                               related_name="lectures")
-    lecturer = models.CharField(max_length=100, verbose_name="prednášajúci")
+    lecturer = models.CharField(max_length=100, blank=True,
+                                verbose_name="prednášajúci")
     title = models.CharField(max_length=147, verbose_name="názov prednášky")
     abstract = models.TextField(blank=True, verbose_name="abstrakt")
     room = models.CharField(max_length=20, verbose_name="miestnosť")
     time = models.TimeField(verbose_name="čas")
+    field = models.CharField(max_length=47, blank=True,
+                             verbose_name="odbor")
     video_url = models.URLField(blank=True, verbose_name="URL videa")
+    materials = models.FileField(upload_to=choose_lecture_materials_filename,
+                                 blank=True,
+                                 verbose_name="materiály",
+                                 help_text="Materiály od prednášajúceho, "
+                                 "napr. slidy v PDF alebo ZIP obsahujúci "
+                                 "všetky obrázky a videá.")
 
     class Meta:
-        verbose_name = "prednáška"
-        verbose_name_plural = "prednášky"
+        verbose_name = "bod programu"
+        verbose_name_plural = "body programu"
         ordering = ("event", "time")
 
     def __unicode__(self):
