@@ -29,6 +29,11 @@
                 <span class="lecturer">{{ lecture.lecturer }}</span> –
                 <span class="lecture_title">{{ lecture.title }}</span>
                 <span class="lecture_room">(Miestnosť {{ lecture.room }})</span>
+                {% if lecture.video_url %}
+                  <div class="lecture_resource">
+                    <a href="{{ lecture.video_url }}">Záznam prednášky</a>
+                  </div>
+                {% endif %}
                 <p class="lecture_abstract">
                   {{ lecture.abstract }}
                 </p>
