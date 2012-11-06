@@ -12,7 +12,7 @@ class IndexView(TemplateView):
         site = get_current_site(self.request)
         flatpage = FlatPage.objects.get(sites__id__exact=site.pk,
                                         url="/")
-        news = Entry.objects.filter(sites__id__exact=site.pk)[:1]
+        news = Entry.objects.filter(sites__id__exact=site.pk)[:5]
         return {
             'flatpage': flatpage,
             'news': news,
