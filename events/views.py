@@ -69,7 +69,8 @@ class AttendanceView(EventDetailView):
             })
 
         individual_list = self.object.individual_signups.select_related(
-                'user__additional_events_details__school')
+                'user__additional_events_details__school').order_by(
+                'user__last_name', 'user__first_name')
         preprocessed_individuals = []
 
         for individual in individual_list:
