@@ -19,13 +19,18 @@
           <ul>
             {% for lecture in lectures %}
               <li>
-                <span class="lecturer">{{ lecture.lecturer }}</span> –
+                {% if lecture.lecturer %}
+                  <span class="lecturer">{{ lecture.lecturer }}</span> –
+                {% endif %}
                 <span class="lecture_title">{{ lecture.title }}</span>
                 <span class="lecture_room">(Miestnosť {{ lecture.room }})</span>
                 {% if lecture.video_url %}
                   <div class="lecture_resource">
                     <a href="{{ lecture.video_url }}">Záznam prednášky</a>
                   </div>
+                {% endif %}
+                {% if lecture.field %}
+                  <p class="lecture_field">Odbor: {{ lecture.field }}</p>
                 {% endif %}
                 <p class="lecture_abstract">
                   {{ lecture.abstract }}
