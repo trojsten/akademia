@@ -18,6 +18,9 @@ class AdditionalUserDetailsForm(forms.ModelForm):
     class Meta:
         model = AdditionalUserDetails
         exclude = ('user',)
+        widgets = {
+            'school': forms.Select(attrs={'class': 'autocomplete'}),
+        }
 
     def __init__(self, *args, **kwargs):
         kwargs.pop('request', None)

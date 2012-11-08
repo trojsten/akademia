@@ -30,17 +30,32 @@ class School(models.Model):
     class Meta:
         verbose_name = "škola"
         verbose_name_plural = "školy"
-        ordering = ("verbose_name",)
+        ordering = ("city", "street", "verbose_name")
 
     def __unicode__(self):
-        return self.verbose_name
+        result = ""
+        if self.abbreviation:
+            result += self.abbreviation + ", "
+        result += self.verbose_name
+        if self.street:
+            result += ", " + self.street
+        if self.city or self.zip_code:
+            result += ", "
+        if self.zip_code:
+            result += self.zip_code
+        if self.city:
+            result += " " + self.city
+        return result
 
 
 class AdditionalUserDetails(models.Model):
     user = models.OneToOneField('auth.User',
                                 related_name='additional_events_details')
     school = models.ForeignKey(School, default=1, verbose_name="škola",
-                               help_text='Pokiaľ vaša škola nie je '
+                               help_text='Do políčka napíšte skratku, '
+                               'časť názvu alebo adresy školy a následne '
+                               'vyberte správnu možnosť zo zoznamu. '
+                               'Pokiaľ vaša škola nie je '
                                'v&nbsp;zozname, vyberte "Gymnázium iné" '
                                'a&nbsp;pošlite nám e-mail.')
     is_teacher = models.BooleanField(verbose_name="som učiteľ",

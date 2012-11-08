@@ -7,6 +7,8 @@
             <title>{% block title %}{% endblock title %} ({{ site.name }})</title>
             <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" />
             <link rel="stylesheet" href="{{ STATIC_URL }}/ksp_login/css/base.css" type="text/css" />
+            <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css" type="text/css" />
+            <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/smoothness/jquery-ui.css" type="text/css" />
             <link rel="alternate" type="application/atom+xml" title="{{ site.name }}: Novinky" href="{% url "news_feed" %}" />
         {% endblock head %}
     </head>
@@ -38,6 +40,10 @@
             <p>Copyright (c) 2012 {{ site.domain }}. Design by <a href="http://www.freecsstemplates.org/">FCT</a>.</p>
         </div>
         {% block scripts %}
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+            <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+            <script src="{{ STATIC_URL }}js/latinize.js"></script>
+            <script src="{{ STATIC_URL }}js/autocomplete.js"></script>
             {% include "ksp_login/parts/include_javascript.html" %}
         {% endblock scripts %}
       </div>
