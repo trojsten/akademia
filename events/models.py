@@ -162,8 +162,8 @@ class Event(models.Model):
 
 def choose_lecture_materials_filename(instance, original):
     extension = os.path.splitext(original)[1]
-    event_slug = slugify(instance.event)
-    lecture_slug = slugify(instance)
+    event_slug = slugify(unicode(instance.event))
+    lecture_slug = slugify(unicode(instance))
     return "%s/%s%s" % (event_slug, lecture_slug, extension)
 
 
