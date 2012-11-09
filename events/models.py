@@ -93,7 +93,8 @@ class AdditionalUserDetails(models.Model):
 
 
 def choose_invitation_filename(instance, original):
-    return "invitations/%s.pdf" % (instance.date.isoformat(),)
+    return "%s/invitation-%s.pdf" % (instance.date.isoformat(),
+                                     slugify(unicode(instance))[:74])
 
 
 class Event(models.Model):
@@ -162,9 +163,9 @@ class Event(models.Model):
 
 def choose_lecture_materials_filename(instance, original):
     extension = os.path.splitext(original)[1]
-    event_slug = slugify(unicode(instance.event))[:20]
-    lecture_slug = slugify(unicode(instance))[:20]
-    return "%s/%s%s" % (event_slug, lecture_slug, extension)
+    lecture_slug = slugify(unicode(instance))[:74]
+    return "%s/%s%s" % (instance.event.date.isoformat(),
+                        lecture_slug, extension)
 
 
 class Lecture(models.Model):
