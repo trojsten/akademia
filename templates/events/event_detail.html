@@ -24,9 +24,14 @@
                 {% endif %}
                 <span class="lecture_title">{{ lecture.title }}</span>
                 <span class="lecture_room">(Miestnosť {{ lecture.room }})</span>
-                {% if lecture.video_url %}
+                {% if lecture.video_url or lecture.materials %}
                   <div class="lecture_resource">
-                    <a href="{{ lecture.video_url }}">Záznam prednášky</a>
+                    {% if lecture.video_url %}
+                      <a href="{{ lecture.video_url }}">Záznam prednášky</a>
+                    {% endif %}
+                    {% if lecture.materials %}
+                      <a href="{{ lecture.materials.url }}">Prezentícia</a>
+                    {% endif %}
                   </div>
                 {% endif %}
                 {% if lecture.field %}
