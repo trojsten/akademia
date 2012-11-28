@@ -80,6 +80,8 @@ class AdditionalUserDetails(models.Model):
         Returns the school grade based on graduation_year and the provided
         date. If no date is provided, today is used.
         """
+        if self.graduation is None:
+            return None
         if date is None:
             date = datetime.date.today()
         # Normalize the given date's year to the one in which the closest

@@ -80,7 +80,7 @@ class AttendanceView(EventDetailView):
             # in the statistics.
             if user_details.school_id not in seen_school_ids:
                 # Only count relevant grades.
-                if -2 <= grade <= 4:
+                if grade is not None and -2 <= grade <= 4:
                     stats['grades'][user_details.get_grade(self.object.date)] += 1
                 stats['total'] += 1
                 if individual.lunch:
