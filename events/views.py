@@ -83,7 +83,8 @@ class AttendanceView(EventDetailView):
                 if -2 <= grade <= 4:
                     stats['grades'][user_details.get_grade(self.object.date)] += 1
                 stats['total'] += 1
-                stats['lunches'] += 1
+                if individual.lunch:
+                    stats['lunches'] += 1
                 if overnight_stats is not None:
                     try:
                         signup = individual.individualovernightsignup
