@@ -6,3 +6,4 @@
 - links between sites
 - UNIT TESTZ!
 - MAX_YEAR = datetime.date.today() + 10 years
+- jump straight to news for logged in users instead of the landing page
