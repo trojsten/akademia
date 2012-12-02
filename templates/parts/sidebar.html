@@ -7,7 +7,7 @@
 </li>
 <li>
   {% if latest_event.is_in_future %}
-    <h2>{% trans "Pripravovaná akcia" context site.name %}</h2>
+    <h2>{% trans "Pripravovaná akcia" context site.name %}: {{ latest_event.date|date:"j. n. Y" }}</h2>
   {% else %}
     <h2>{% trans "Posledná akcia" context site.name %}</h2>
   {% endif %}
