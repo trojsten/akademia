@@ -175,7 +175,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
-    "ksp_login.context_processors.login_providers_short",
+    "ksp_login.context_processors.login_providers_both",
     "akademia.context_processors.current_site",
 )
 
