@@ -110,6 +110,12 @@ class Event(models.Model):
                                   help_text="PDF s pozvánkou, keď bude "
                                   "hotová.")
     sites = models.ManyToManyField(Site)
+    poll_begin = models.DateTimeField(blank=True, null=True,
+                                      help_text="Spustenie ankety")
+    poll_end = models.DateTimeField(blank=True, null=True,
+                                    help_text="Ukončenie ankety")
+    poll = models.ForeignKey('polls.Poll', blank=True, null=True,
+                             help_text="Anketa")
 
     class Meta:
         verbose_name = "akcia"
@@ -162,6 +168,12 @@ class Event(models.Model):
     def signup_period_open(self):
         return now() < self.deadline
 
+    def poll_is_active(self):
+        now_ = now()
+        return (self.poll and self.poll_begin and
+                self.poll_begin <= now_ and
+                (not self.poll_end or self.poll_end >= now_))
+
 
 def choose_lecture_materials_filename(instance, original):
     extension = os.path.splitext(original)[1]
@@ -188,6 +200,8 @@ class Lecture(models.Model):
                                  help_text="Materiály od prednášajúceho, "
                                  "napr. slidy v PDF alebo ZIP obsahujúci "
                                  "všetky obrázky a videá.")
+    poll = models.ForeignKey('polls.Poll', blank=True, null=True,
+                             help_text="Anketa")
 
     class Meta:
         verbose_name = "bod programu"
