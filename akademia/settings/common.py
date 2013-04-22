@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'events',
     'news',
+    'polls',
 )
 
 # A sample logging configuration. The only tangible logging
