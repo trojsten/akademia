@@ -13,6 +13,26 @@ class AnswerForm(forms.ModelForm):
         fields = ('value',)
 
 
+class StarsAnswerForm(forms.ModelForm):
+    OPTIONAL_STARS_CHOICES = ((u'', '--------'),) + Answer.STARS_CHOICES
+    value = forms.ChoiceField(choices=OPTIONAL_STARS_CHOICES,
+                              required=False)
+
+    class Meta(AnswerForm.Meta):
+        pass
+
+
+forms_for_answer_types = {
+    Question.TEXT: AnswerForm,
+    Question.STARS: StarsAnswerForm,
+}
+
+
+def answer_form_factory(question, **kwargs):
+    form_class = forms_for_answer_types[question.type]
+    return form_class(**kwargs)
+
+
 class EventPollFormSet(object):
     """
     This class glues together the whole questionnaire for a single event
@@ -56,8 +76,8 @@ class EventPollFormSet(object):
                     'target_id': event.id,
                     'question_id': question.id,
                 }
-                form = AnswerForm(instance=instance, prefix=prefix,
-                                  **form_kwargs)
+                form = answer_form_factory(question, instance=instance,
+                                           prefix=prefix, **form_kwargs)
                 general_forms.append((question, form))
 
             forms.append((self.general_questions_title, general_forms))
@@ -89,8 +109,8 @@ class EventPollFormSet(object):
                     'target_id': lecture.id,
                     'question_id': question.id,
                 }
-                form = AnswerForm(instance=instance, prefix=prefix,
-                                  **form_kwargs)
+                form = answer_form_factory(question, instance=instance,
+                                           prefix=prefix, **form_kwargs)
                 lecture_forms.append((question, form))
 
             forms.append((lecture, lecture_forms))
