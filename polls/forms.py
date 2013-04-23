@@ -12,8 +12,13 @@ class AnswerForm(forms.ModelForm):
         model = Answer
         fields = ('value',)
 
+    def save(self, *args, **kwargs):
+        if self.cleaned_data['value']:
+            return super(AnswerForm, self).save(*args, **kwargs)
+        return None
 
-class StarsAnswerForm(forms.ModelForm):
+
+class StarsAnswerForm(AnswerForm):
     OPTIONAL_STARS_CHOICES = ((u'', '--------'),) + Answer.STARS_CHOICES
     value = forms.ChoiceField(choices=OPTIONAL_STARS_CHOICES,
                               required=False)
@@ -121,6 +126,7 @@ class EventPollFormSet(object):
                    for question, form in group)
 
     def save(self, commit=True):
-        return [form.save(commit)
-                for title, group in self.forms
-                for question, form in group]
+        instances = [form.save(commit)
+                     for title, group in self.forms
+                     for question, form in group]
+        return [i for i in instances if i is not None]

@@ -38,3 +38,7 @@ class Answer(models.Model):
     content_type = models.ForeignKey('contenttypes.ContentType')
     target = generic.GenericForeignKey('content_type', 'object_id')
     value = models.TextField(blank=True)
+
+    def __unicode__(self):
+        return "%s -- %s -- %s: %s" % (self.user, self.target,
+                                       self.question, self.value)
