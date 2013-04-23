@@ -115,6 +115,7 @@ class Event(models.Model):
     poll_end = models.DateTimeField(blank=True, null=True,
                                     help_text="Ukončenie ankety")
     poll = models.ForeignKey('polls.Poll', blank=True, null=True,
+                             related_name="events",
                              help_text="Anketa")
 
     class Meta:
@@ -201,6 +202,7 @@ class Lecture(models.Model):
                                  "napr. slidy v PDF alebo ZIP obsahujúci "
                                  "všetky obrázky a videá.")
     poll = models.ForeignKey('polls.Poll', blank=True, null=True,
+                             related_name="lectures",
                              help_text="Anketa")
 
     class Meta:

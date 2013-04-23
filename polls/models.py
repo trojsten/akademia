@@ -18,7 +18,7 @@ class Question(models.Model):
         (TEXT, "Text"),
         (STARS, "Hviezdičky"),
     )
-    poll = models.ForeignKey(Poll)
+    poll = models.ForeignKey(Poll, related_name="questions")
     question = models.CharField(max_length=247)
     type = models.PositiveSmallIntegerField(choices=TYPE_CHOICES)
     order = models.PositiveSmallIntegerField()
@@ -31,9 +31,10 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
+    STARS_CHOICES = tuple((i, str(i)) for i in range(1, 6))
     user = models.ForeignKey('auth.user')
-    question = models.ForeignKey(Question)
+    question = models.ForeignKey(Question, related_name="answers")
     object_id = models.IntegerField()
     content_type = models.ForeignKey('contenttypes.ContentType')
-    item = generic.GenericForeignKey('content_type', 'object_id')
-    value = models.TextField()
+    target = generic.GenericForeignKey('content_type', 'object_id')
+    value = models.TextField(blank=True)

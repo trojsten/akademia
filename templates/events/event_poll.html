@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Anketa: {{ event }}{% endblock title %}
+
+{% block content_top_navigation %}
+  <a href="{{ event.get_absolute_url }}">Naspäť na program</a>
+{% endblock content_top_navigation %}
+
+{% block content %}
+  {% if event.poll_is_active %}
+    <form action="" method="POST">
+      {% csrf_token %}
+      {% for group_title, group in polls %}
+        <h2>{{ group_title }}</h2>
+        {% for question, form in group %}
+        <p class="poll_question">
+          {{ question }}
+        </p>
+        <p class="poll_answer">
+          {{ form.value.errors }}
+          {{ form.value }}
+        </p>
+        {% endfor %}
+      {% endfor %}
+      <p>
+        <input type="submit" value="Odoslať" />
+      </p>
+    </form>
+  {% else %}
+    <p>Anketa pre akciu {{ event }} momentálne nebeží.
+  {% endif %}
+{% endblock content %}
