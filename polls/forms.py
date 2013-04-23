@@ -19,7 +19,7 @@ class AnswerForm(forms.ModelForm):
 
 
 class StarsAnswerForm(AnswerForm):
-    OPTIONAL_STARS_CHOICES = ((u'', '--------'),) + Answer.STARS_CHOICES
+    OPTIONAL_STARS_CHOICES = (('', '--------'),) + Answer.STARS_CHOICES
     value = forms.ChoiceField(choices=OPTIONAL_STARS_CHOICES,
                               required=False)
 
@@ -93,7 +93,7 @@ class EventPollFormSet(object):
         answers = Answer.objects.filter(
             user=request.user,
             content_type=lecture_type,
-            object_id__in=event.poll.lectures.all(),
+            object_id__in=event.lectures.all(),
             # TODO: this might be redundant
             question__in=questions,
         )
