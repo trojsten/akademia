@@ -39,6 +39,9 @@ class Answer(models.Model):
     target = generic.GenericForeignKey('content_type', 'object_id')
     value = models.TextField(blank=True)
 
+    class Meta:
+        unique_together = (('user', 'question', 'object_id', 'content_type'),)
+
     def __unicode__(self):
         return "%s -- %s -- %s: %s" % (self.user, self.target,
                                        self.question, self.value)
