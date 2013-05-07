@@ -299,6 +299,17 @@ ul.event_schedule, ul.event_schedule ul {
   padding-left: 1em;
 }
 
+/* Polls */
+
+.poll_question > p {
+  font-weight: 700;
+  font-size: 110%;
+}
+
+.poll_answer {
+  margin-bottom: 2ex;
+}
+
 /* Sidebar */
 
 #sidebar {

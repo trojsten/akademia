@@ -19,7 +19,7 @@ class AnswerForm(forms.ModelForm):
 
 
 class StarsAnswerForm(AnswerForm):
-    OPTIONAL_STARS_CHOICES = (('', '--------'),) + Answer.STARS_CHOICES
+    OPTIONAL_STARS_CHOICES = (('', 'žiadna odpoveď'),) + Answer.STARS_CHOICES
     value = forms.ChoiceField(choices=OPTIONAL_STARS_CHOICES,
                               required=False)
 

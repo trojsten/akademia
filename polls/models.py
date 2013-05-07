@@ -31,7 +31,8 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    STARS_CHOICES = tuple((i, str(i)) for i in range(1, 6))
+    STARS_CHOICES = tuple((i, "%d z 5 hviezdičiek" % (i,))
+                          for i in range(1, 6))
     user = models.ForeignKey('auth.user')
     question = models.ForeignKey(Question, related_name="answers")
     object_id = models.IntegerField()

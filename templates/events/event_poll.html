@@ -13,13 +13,15 @@
       {% for group_title, group in polls %}
         <h2>{{ group_title }}</h2>
         {% for question, form in group %}
-        <p class="poll_question">
-          {{ question }}
-        </p>
-        <p class="poll_answer">
-          {{ form.value.errors }}
-          {{ form.value }}
-        </p>
+          <div class="poll_question">
+            <p>
+              {{ question }}
+            </p>
+            <div class="poll_answer">
+              {{ form.value.errors }}
+              {{ form.value }}
+            </div>
+          </div>
         {% endfor %}
       {% endfor %}
       <p>
