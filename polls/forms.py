@@ -13,6 +13,8 @@ class AnswerForm(forms.ModelForm):
         fields = ('value',)
 
     def save(self, *args, **kwargs):
+        # FIXME: all wrong, need to delete in case an instance exists and
+        # is cleared
         if self.cleaned_data['value']:
             return super(AnswerForm, self).save(*args, **kwargs)
         return None
@@ -21,7 +23,10 @@ class AnswerForm(forms.ModelForm):
 class StarsAnswerForm(AnswerForm):
     OPTIONAL_STARS_CHOICES = (('', 'žiadna odpoveď'),) + Answer.STARS_CHOICES
     value = forms.ChoiceField(choices=OPTIONAL_STARS_CHOICES,
-                              required=False)
+                              required=False,
+                              widget=forms.RadioSelect(attrs={
+                                  'class': 'stars',
+                              }))
 
     class Meta(AnswerForm.Meta):
         pass

@@ -1,0 +1,54 @@
+html.with-stars-js ul.hidden-stars-radios {
+    display: block;
+    position: absolute;
+    left: -5000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.stars-container {
+    margin: 0.125em 0;
+}
+
+.stars-container .star,
+.stars-container .cancel {
+    cursor: pointer;
+}
+
+.stars-container svg {
+    width: 4em;
+    height: 4em;
+}
+
+.stars-container .cancel polygon {
+    fill: #000;
+    stroke: #bbb;
+    stroke-width: .2;
+}
+
+.stars-container .star polygon {
+    stroke-linejoin: round;
+    fill: none;
+    stroke: #bbb;
+    stroke-width: 1em;
+}
+
+.stars-container .star.active polygon {
+    fill: #e6cf00;
+    stroke-width: .3em;
+}
+
+.stars-container .star.hover polygon {
+    stroke: #000;
+    stroke-width: .8em;
+}
+
+.stars-container.cancel-hover .cancel polygon {
+    fill: #ea6873;
+}
+
+.stars-container.cancel-hover .star.active polygon,
+.stars-container.cancel-hover .cancel {
+    fill: #ea6873;
+}

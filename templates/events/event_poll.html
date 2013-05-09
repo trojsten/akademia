@@ -32,3 +32,13 @@
     <p>Anketa pre akciu {{ event }} momentálne nebeží.
   {% endif %}
 {% endblock content %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/stars.js"></script>
+{% endblock scripts %}
+
+{% block head %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/stars.css" type="text/css" />
+{% endblock head %}
