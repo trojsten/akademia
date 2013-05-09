@@ -13,11 +13,15 @@ class AnswerForm(forms.ModelForm):
         fields = ('value',)
 
     def save(self, *args, **kwargs):
-        # FIXME: all wrong, need to delete in case an instance exists and
-        # is cleared
-        if self.cleaned_data['value']:
-            return super(AnswerForm, self).save(*args, **kwargs)
-        return None
+        # This will disregard the commit argument and always save or
+        # delete the instance.
+        kwargs['commit'] = False
+        instance = super(AnswerForm, self).save(*args, **kwargs)
+        if instance.value:
+            instance.save()
+        elif instance.id:
+            instance.delete()
+        return instance.id and instance or None
 
 
 class StarsAnswerForm(AnswerForm):
@@ -131,7 +135,7 @@ class EventPollFormSet(object):
                    for question, form in group)
 
     def save(self, commit=True):
-        instances = [form.save(commit)
+        instances = [form.save(commit=commit)
                      for title, group in self.forms
                      for question, form in group]
         return [i for i in instances if i is not None]
