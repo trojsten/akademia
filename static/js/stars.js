@@ -37,7 +37,7 @@
 
     var setup_stars = function() {
         var $question = $(this);
-        var $ul = $question.find('ul');
+        var $ul = $question.find('ul').not('.errorlist');
         var $none_option = $question.find('.stars[type="radio"][value=""]');
         var $options = $question.find('.stars[type="radio"]').not($none_option);
         if (!($ul.length == 1 && $none_option.length == 1 && $options.length > 0)) {
