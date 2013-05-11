@@ -1,7 +1,8 @@
 # coding: utf-8
 from __future__ import unicode_literals
-from django.db import models
 from django.contrib.contenttypes import generic
+from django.db import models
+from django.utils.safestring import mark_safe
 
 
 class Poll(models.Model):
@@ -46,3 +47,11 @@ class Answer(models.Model):
     def __unicode__(self):
         return "%s -- %s -- %s: %s" % (self.user, self.target,
                                        self.question, self.value)
+
+    def render_text(self):
+        return mark_safe("<p>%s</p>" % (
+            self.value.strip()
+            .replace('\r\n', '\n').replace('\n\r', '\n')
+            .replace('\r', '\n')
+            .replace('\n\n', '</p><p>').replace('\n', '<br />'),
+        ))

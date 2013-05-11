@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Výsledky ankety: {{ event }}{% endblock title %}
+
+{% block content_top_navigation %}
+  <a href="{{ event.get_absolute_url }}">Naspäť na program</a>
+{% endblock content_top_navigation %}
+
+{% block content %}
+  {% for group_title, group in polls %}
+    <h2>{{ group_title }}</h2>
+    {% for question in group %}
+      <div class="poll_question">
+        <p>
+          {{ question.question }}
+        </p>
+        {% if question.answers %}
+          {% for answer in question.answers %}
+            <div class="poll_answer_text">
+              <div class="poll_answer_header" id="answer_{{ answer.id }}">
+                <a href="#answer_{{ answer.id }}">#{{ answer.id }}</a>:
+              </div>
+              {{ answer.render_text }}
+            </div>
+          {% endfor %}
+        {% elif question.options %}
+          <table class="poll_options_result">
+            <thead>
+              <tr>
+                <td>Možnosť</td>
+                <td>Počet hlasov</td>
+              </tr>
+            </thead>
+            <tbody>
+              {% for option in question.options %}
+                <tr>
+                  {% for cell in option %}
+                    <td>{{ cell }}</td>
+                  {% endfor %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <div class="poll_answers_none">
+            <p>Túto otázku nikto nezodpovedal.</p>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% endfor %}
+{% endblock content %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="{{ STATIC_URL }}js/choice_distributions.js"></script>
+{% endblock scripts %}

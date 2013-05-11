@@ -149,6 +149,22 @@ class Event(models.Model):
                     'day': self.date.strftime('%d'),
                 })
 
+    @models.permalink
+    def get_poll_url(self):
+        return ("event_poll", (), {
+                    'year': self.date.strftime('%Y'),
+                    'month': self.date.strftime('%m'),
+                    'day': self.date.strftime('%d'),
+                })
+
+    @models.permalink
+    def get_poll_results_url(self):
+        return ("event_poll_results", (), {
+                    'year': self.date.strftime('%Y'),
+                    'month': self.date.strftime('%m'),
+                    'day': self.date.strftime('%d'),
+                })
+
     def get_grouped_lectures(self):
         """
         Returns the lectures for this event in a SortedDict mapping times

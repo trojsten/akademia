@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 
 from events.views import (ArchiveView, EventDetailView, AttendanceView,
         latest_event_detail)
-from polls.views import EventPollView
+from polls.views import EventPollView, EventPollResultsView
 
 
 urlpatterns = patterns("",
@@ -17,4 +17,7 @@ urlpatterns = patterns("",
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/poll/$',
         EventPollView.as_view(), kwargs={'slug': ''},
         name="event_poll"),
+    url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/poll/results/$',
+        EventPollResultsView.as_view(), kwargs={'slug': ''},
+        name="event_poll_results"),
 )

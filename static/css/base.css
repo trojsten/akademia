@@ -310,6 +310,26 @@ ul.event_schedule, ul.event_schedule ul {
   margin-bottom: 2ex;
 }
 
+/* Poll results */
+
+.choice-dist-container {
+  height: 20ex;
+}
+
+html.with-highcharts .poll_options_result {
+  display: none;
+}
+
+.poll_answer_text {
+  border-top: 1px dashed #bbb;
+  padding-top: 1ex;
+}
+
+.poll_answer_text > p {
+  margin-left: 1em;
+  line-height: 147%;
+}
+
 /* Sidebar */
 
 #sidebar {
