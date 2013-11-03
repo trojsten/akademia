@@ -270,7 +270,10 @@ class IndividualOvernightSignup(IndividualSignup):
                                        "karimatku. Karimatiek je obmedzené "
                                        "množstvo, takže pokiaľ môžete, "
                                        "radšej si doneste vlastné.")
-    game_participation = models.BooleanField(verbose_name="zúčastním sa hry")
+    game_participation = models.BooleanField(verbose_name="zúčastním sa hry",
+                                             help_text="Pre viac detailov "
+                                             "o tom, kedy sa bude konať "
+                                             "hra, sledujte novinky.")
 
 
 class SchoolSignup(models.Model):
