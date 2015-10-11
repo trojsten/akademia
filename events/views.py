@@ -2,7 +2,6 @@
 from collections import defaultdict
 import logging
 
-from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.views.generic import DateDetailView, DetailView, ListView
