@@ -49,6 +49,11 @@ class EventAdmin(admin.ModelAdmin):
                IndividualOvernightSignupInline, SchoolSignupInline)
 
     def get_inline_instances(self, request, obj=None):
+        """
+        Only show those signup inlines that apply to the type of the event
+        we are editing. Skip signup inlines altogether when creating new
+        events.
+        """
         if obj is not None:
             klub = obj.sites.filter(domain__exact='klub.trojsten.sk').count() > 0
         inline_instances = []
