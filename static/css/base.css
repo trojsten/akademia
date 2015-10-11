@@ -350,7 +350,7 @@ html.with-highcharts .poll_options_result {
 	padding: 0px;
 }
 
-#sidebar li ul {
+#sidebar > ul > li > ul {
 	margin: 0px;
 	padding-bottom: 30px;
 }
@@ -403,6 +403,14 @@ html.with-highcharts .poll_options_result {
 
 #feed_link img {
   width: 32px;
+}
+
+.not-logged-in a#login-dropdown {
+        display: none;
+}
+
+.logged-in a#login-dropdown {
+        margin-bottom: 1em;
 }
 
 /* Footer */

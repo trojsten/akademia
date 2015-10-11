@@ -129,7 +129,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.flatpages',
     'south',
-    'social_auth',
+    'social.apps.django_app.default',
     'ksp_login',
     'django.contrib.admin',
     'events',
@@ -182,17 +182,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 # The list of authentication backends we want to allow.
 AUTHENTICATION_BACKENDS = (
-    'social_auth.backends.facebook.FacebookBackend',
-#    'social_auth.backends.twitter.TwitterBackend',
-    'social_auth.backends.google.GoogleBackend',
-#    'social_auth.backends.contrib.linkedin.LinkedinBackend',
-#    'social_auth.backends.contrib.livejournal.LiveJournalBackend',
-#    'social_auth.backends.contrib.dropbox.DropboxBackend',
-#    'social_auth.backends.contrib.flickr.FlickrBackend',
-    'ksp_login.backends.MyOpenIdBackend',
-    'social_auth.backends.contrib.github.GithubBackend',
-    'ksp_login.backends.LaunchpadBackend',
-    'social_auth.backends.OpenIDBackend',
+    'social.backends.facebook.FacebookOAuth2',
+    'ksp_login.backends.MyOpenIdAuth',
+    'social.backends.github.GithubOAuth2',
+    'ksp_login.backends.LaunchpadAuth',
+    'social.backends.open_id.OpenIdAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -204,11 +198,17 @@ LOGIN_URL = "/account/login/"
 LOGIN_REDIRECT_URL = "/account/"
 
 SOCIAL_AUTH_PIPELINE = (
-    'social_auth.backends.pipeline.social.social_auth_user',
-    'social_auth.backends.pipeline.user.get_username',
-    'social_auth.backends.pipeline.misc.save_status_to_session',
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
     'ksp_login.pipeline.register_user',
-    'social_auth.backends.pipeline.social.associate_user',
-    'social_auth.backends.pipeline.social.load_extra_data',
-    'social_auth.backends.pipeline.user.update_user_details'
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    # Rewrites user details on each social login -- not desirable.
+    #'social.pipeline.user.user_details',
+)
+
+KSP_LOGIN_PROFILE_FORMS = (
+    'events.forms.AdditionalUserDetailsForm',
 )
