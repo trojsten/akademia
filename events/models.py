@@ -227,8 +227,8 @@ class Lecture(models.Model):
                              help_text="Anketa")
 
     class Meta:
-        verbose_name = "bod programu"
-        verbose_name_plural = "body programu"
+        verbose_name = "bod programu (napr. prednáška)"
+        verbose_name_plural = "body programu (napr. prednášky)"
         ordering = ("event", "time")
 
     def __str__(self):
@@ -281,6 +281,10 @@ class IndividualOvernightSignup(IndividualSignup):
                                              "o tom, kedy sa bude konať "
                                              "hra, sledujte novinky.")
 
+    class Meta:
+        verbose_name = "prihláška jednotlivca s možnosťou prespať"
+        verbose_name_plural = "prihlášky jednotlivcov s možnosťou prespať"
+
 
 class SchoolSignup(models.Model):
     event = models.ForeignKey(Event, verbose_name="akcia",
@@ -296,6 +300,10 @@ class SchoolSignup(models.Model):
                                                  verbose_name="počet štvrtákov")
     lunches = models.PositiveSmallIntegerField(default=0,
                                                verbose_name="počet obedov")
+
+    class Meta:
+        verbose_name = "hromadná prihláška"
+        verbose_name_plural = "hromadné prihlášky"
 
     def get_total_students(self):
         return self.students1 + self.students2 + self.students3 + self.students4
