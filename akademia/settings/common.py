@@ -3,7 +3,7 @@ import os
 import akademia
 
 PROJECT_DIR, PROJECT_MODULE_NAME = os.path.split(
-    os.path.dirname(os.path.dirname(os.path.realpath(akademia.__file__)))
+    os.path.dirname(os.path.realpath(akademia.__file__))
 )
 
 DEBUG = False
@@ -128,7 +128,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.flatpages',
-    'django.contrib.markup',
     'south',
     'social_auth',
     'ksp_login',
@@ -136,6 +135,7 @@ INSTALLED_APPS = (
     'events',
     'news',
     'polls',
+    'akademia',
 )
 
 # A sample logging configuration. The only tangible logging

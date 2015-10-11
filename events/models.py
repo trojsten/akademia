@@ -6,6 +6,7 @@ import os.path
 from django.db import models
 from django.contrib.sites.models import Site, get_current_site
 from django.utils.datastructures import SortedDict
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 
 from events.utils import slugify
@@ -15,6 +16,7 @@ from events.utils import slugify
 GRADUATION_GRADE = 4
 
 
+@python_2_unicode_compatible
 class School(models.Model):
     abbreviation = models.CharField(max_length=100,
                                     blank=True,
@@ -32,7 +34,7 @@ class School(models.Model):
         verbose_name_plural = "školy"
         ordering = ("city", "street", "verbose_name")
 
-    def __unicode__(self):
+    def __str__(self):
         result = ""
         if self.abbreviation:
             result += self.abbreviation + ", "
@@ -48,6 +50,7 @@ class School(models.Model):
         return result
 
 
+@python_2_unicode_compatible
 class AdditionalUserDetails(models.Model):
     user = models.OneToOneField('auth.User',
                                 related_name='additional_events_details')
@@ -72,7 +75,7 @@ class AdditionalUserDetails(models.Model):
         verbose_name = "dodatočné údaje o užívateľoch"
         verbose_name_plural = "dodatočné údaje o užívateľoch"
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s" % (self.user,)
 
     def get_grade(self, date=None):
@@ -99,6 +102,7 @@ def choose_invitation_filename(instance, original):
                                      slugify(unicode(instance))[:74])
 
 
+@python_2_unicode_compatible
 class Event(models.Model):
     name = models.CharField(max_length=100,
                             help_text="Názov akcie, napr. Klub Trojstenu "
@@ -123,7 +127,7 @@ class Event(models.Model):
         verbose_name_plural = "akcie"
         ordering = ("-date",)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s %s" % (self.name, self.date.year)
 
     @models.permalink
@@ -199,6 +203,7 @@ def choose_lecture_materials_filename(instance, original):
                         lecture_slug, extension)
 
 
+@python_2_unicode_compatible
 class Lecture(models.Model):
     event = models.ForeignKey(Event, verbose_name="akcia",
                               related_name="lectures")
@@ -226,7 +231,7 @@ class Lecture(models.Model):
         verbose_name_plural = "body programu"
         ordering = ("event", "time")
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s: %s" % (self.lecturer, self.title)
 
 
@@ -238,6 +243,7 @@ def get_latest_event(request):
     return Event.objects.filter(sites__id__exact=site.pk).order_by('-date')[0]
 
 
+@python_2_unicode_compatible
 class IndividualSignup(models.Model):
     event = models.ForeignKey(Event, verbose_name="akcia",
                               related_name="individual_signups")
@@ -249,7 +255,7 @@ class IndividualSignup(models.Model):
         verbose_name = "prihláška jednotlivca"
         verbose_name_plural = "prihlášky jednotlivcov"
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s, %s" % (self.user, self.event)
 
 

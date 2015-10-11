@@ -2,16 +2,19 @@
 from __future__ import unicode_literals
 from django.contrib.contenttypes import generic
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.safestring import mark_safe
 
 
+@python_2_unicode_compatible
 class Poll(models.Model):
     name = models.CharField(max_length=147)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
+@python_2_unicode_compatible
 class Question(models.Model):
     TEXT = 0
     STARS = 1
@@ -27,10 +30,11 @@ class Question(models.Model):
     class Meta:
         ordering = ('order',)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.question
 
 
+@python_2_unicode_compatible
 class Answer(models.Model):
     STARS_CHOICES = tuple((i, "%d z 5 hviezdičiek" % (i,))
                           for i in range(1, 6))
@@ -44,7 +48,7 @@ class Answer(models.Model):
     class Meta:
         unique_together = (('user', 'question', 'object_id', 'content_type'),)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s -- %s -- %s: %s" % (self.user, self.target,
                                        self.question, self.value)
 

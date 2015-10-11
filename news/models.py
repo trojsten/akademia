@@ -1,11 +1,13 @@
 # coding: utf-8
 from __future__ import unicode_literals
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.html import mark_safe
 from django.contrib.sites.models import Site
 from markdown import markdown
 
 
+@python_2_unicode_compatible
 class Entry(models.Model):
     author = models.ForeignKey('auth.User', related_name='news_entries')
     pub_date = models.DateTimeField(verbose_name='publication date', auto_now_add=True)
@@ -22,7 +24,7 @@ class Entry(models.Model):
         verbose_name = 'novinka'
         verbose_name_plural = 'novinky'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def rendered_text(self):
