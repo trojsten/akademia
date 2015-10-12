@@ -183,6 +183,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # The list of authentication backends we want to allow.
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
+    'social.backends.google.GoogleOAuth2',
     'ksp_login.backends.MyOpenIdAuth',
     'social.backends.github.GithubOAuth2',
     'ksp_login.backends.LaunchpadAuth',
