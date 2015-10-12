@@ -1,4 +1,5 @@
 # Common settings for akademia.
+from __future__ import absolute_import
 import os
 import akademia
 
