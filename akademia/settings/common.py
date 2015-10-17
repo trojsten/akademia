@@ -185,7 +185,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
     'social.backends.google.GoogleOAuth2',
-    'ksp_login.backends.MyOpenIdAuth',
     'social.backends.github.GithubOAuth2',
     'ksp_login.backends.LaunchpadAuth',
     'social.backends.open_id.OpenIdAuth',
