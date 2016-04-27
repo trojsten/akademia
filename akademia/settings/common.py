@@ -129,7 +129,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.flatpages',
-    'south',
     'social.apps.django_app.default',
     'ksp_login',
     'django.contrib.admin',
