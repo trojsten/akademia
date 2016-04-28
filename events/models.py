@@ -1,10 +1,11 @@
 # coding: utf-8
 from __future__ import unicode_literals
+
 import datetime
 import os.path
+from collections import OrderedDict
 
 from django.db import models
-from django.utils.datastructures import SortedDict
 from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import python_2_unicode_compatible
@@ -172,13 +173,13 @@ class Event(models.Model):
 
     def get_grouped_lectures(self):
         """
-        Returns the lectures for this event in a SortedDict mapping times
-        to lists of lectures sorted by their rooms.
+        Returns the lectures for this event in an OrderedDict mapping
+        times to lists of lectures sorted by their rooms.
         """
         try:
             return self._grouped_lectures_cache
         except AttributeError:
-            result = SortedDict()
+            result = OrderedDict()
             for lecture in self.lectures.order_by("time", "room"):
                 result.setdefault(lecture.time, []).append(lecture)
             self._grouped_lectures_cache = result
