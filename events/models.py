@@ -4,8 +4,9 @@ import datetime
 import os.path
 
 from django.db import models
-from django.contrib.sites.models import Site, get_current_site
 from django.utils.datastructures import SortedDict
+from django.contrib.sites.models import Site
+from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 

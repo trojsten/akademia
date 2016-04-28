@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 from django.contrib.flatpages.models import FlatPage
-from django.contrib.sites.models import get_current_site
+from django.contrib.sites.shortcuts import get_current_site
 
 from news.models import Entry
 
