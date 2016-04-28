@@ -1,6 +1,6 @@
 # coding: utf-8
 from __future__ import unicode_literals
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.safestring import mark_safe
@@ -42,7 +42,7 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, related_name="answers")
     object_id = models.IntegerField()
     content_type = models.ForeignKey('contenttypes.ContentType')
-    target = generic.GenericForeignKey('content_type', 'object_id')
+    target = GenericForeignKey('content_type', 'object_id')
     value = models.TextField(blank=True)
 
     class Meta:
